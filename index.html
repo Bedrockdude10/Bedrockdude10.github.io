@@ -3,141 +3,239 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-        nav {
-            margin-top: 0.5rem;
-        }
-        nav a {
-            color: #fff;
-            margin: 0 1rem;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .container {
-            padding: 2rem;
-            max-width: 1200px;
-            margin: auto;
-        }
-        .about, .projects, .contact {
-            margin-bottom: 2rem;
-        }
-        .projects img {
-            max-width: 100%;
-            height: auto;
-            border: 1px solid #ddd;
-            margin-bottom: 1rem;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background: #333;
-            color: #fff;
-        }
-    </style>
+    <title>Danny Rollo — ML Engineer</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>Danny Rollo</h1>
-        <nav>
-            <a href="#about">About</a>
-            <a href="#software projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </nav>
-    </header>
 
-    <div class="container">
-        <section id="about" class="about">
-            <h2>About Me</h2>
-            <p>Hello! I’m a developer passionate about creating web applications and exploring new technologies. Check out my projects below and feel free to get in touch!</p>
-        </section>
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+    <div class="hero-inner fade-in">
+        <div class="hero-label">Machine Learning Engineer</div>
+        <h1>Danny Rollo<br><span class="highlight">builds intelligent systems.</span></h1>
+        <p class="hero-bio">
+            MS Computer Science @ Northeastern (May 2026). I build agentic AI systems, deep learning models, and production ML pipelines. Currently exploring how autonomous agents can operate responsibly at scale.
+        </p>
+        <div class="status">Available June 2026 · NYC Metro</div>
+        <div class="hero-links">
+            <a href="mailto:dannyrollo4@gmail.com">Email</a>
+            <a href="https://www.linkedin.com/in/danny-r-943861133/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/bedrockdude10" target="_blank">GitHub</a>
+            <a href="media/Danny_Rollo_Resume.pdf" target="_blank">Resume ↗</a>
+        </div>
+    </div>
+</section>
 
-        <section id="software projects" class="projects">
-            <h2>Software Engineering Projects</h2>
-            <div>
-                <h3>Booker: Agent Matching Artists with Venues </h3>
-                <iframe 
-                    src="https://booker-hjbdoiu5fobsifeuwwnpsg.streamlit.app/?embedded=true"
-                    width="100%"
-                    height="800px"
-                    style="border: none; border-radius: 8px;"
-                ></iframe>
-                <h3>Kanbas Learning Management Platform </h3>
-                <img src="media/Kanbas Dashboard Screen.png" alt="Screenshot of Kanbas Dashboard">
-                <p>My fullstack recreation of the popular learning management platform Canvas. Completed for CS 5610: Web Development at Northeastern University. <a href="https://github.com/bedrockdude10/kanbas-react-web-app" target="_blank">View on GitHub</a></p>
-                <video autoplay loop muted controls width="640">
-                    <source src="media/Kanbas Login Demo.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
-            <div>
-                <h3>Cartoonify</h3>
-                <p><p>C++ program for adding cartoon-like visual effects to 3D models. Completed for CS 5310: Web Development at Northeastern University. <a href="https://github.com/Bedrockdude10/Cartoonify" target="_blank">View on GitHub</a></p>
-                <iframe 
-                    width="560" 
-                    height="315" 
-                    src="https://www.youtube.com/embed/XytZQ8_EMOQ?si=ZdlRz5XE4pNHguZb" 
-                    title="YouTube video player" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    referrerpolicy="strict-origin-when-cross-origin" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </section>
+<!-- ═══ PROJECTS ═══ -->
+<div class="section">
+    <div class="section-label">Featured Projects</div>
 
-        <section id="data projects" class="projects">
-            <h2>Data Science Projects</h2>
-            <div>
-                <h3>Cancer Classification Project</h3>
-                <p>Project using multiple machine-learning methods to identify cancer cells in a gene dataset. Completed for MATH 4570: Matrix Methods in Machine Learning & Data Analysis at Northeastern University. <a href="https://github.com/Bedrockdude10/Cancer-Classification-Project/tree/main" target="_blank">View on GitHub</a></p>
-                <iframe 
-                    src="media/Cancer Classification Results Slideshow.pdf" 
-                    width="100%" 
-                    height="600px" 
-                    style="border: 1px solid #ddd;">
-                    This browser does not support PDFs. Please download the PDF to view it: 
-                    <a href="media/Cancer Classification Results Slideshow.pdf" target="_blank">Download PDF</a>.
-                </iframe>
-            </div>
-            <div>
-                <h3>Gene Clustering Analysis</h3>
-                <p>This project identifies marker genes and characterizes cell clusters in single-cell RNA-seq data processed with pandas & scanpy using unsupervised clustering with k-means, differential expression analysis, and visualization with seaborn to reveal biological insights. Completed for an application for Machine Learning Intern role at Fishell Labs. <a href="https://github.com/Bedrockdude10/FishellLabResearchInternAppOct2023/blob/main" target="_blank">View on GitHub</a></p>
-                <iframe 
-                    src="https://nbviewer.org/github/Bedrockdude10/FishellLabResearchInternAppOct2023/blob/main/GeneExpression.ipynb" 
-                    width="100%" 
-                    height="800px" 
-                    style="border: none;">
-                </iframe>
-            </div>
-        </section>
+    <!-- BOOKER -->
+    <div class="project fade-in">
+        <div class="project-header">
+            <h3>Booker</h3>
+            <span class="project-type type-agentic">Agentic AI</span>
+        </div>
+        <p class="project-subtitle">Multi-agent system for autonomous artist–venue matching with production-grade orchestration, memory, and safety guardrails.</p>
 
-        <section id="contact" class="contact">
-            <h2>Contact</h2>
-            <p>Feel free to reach out to me via email at <a href="mailto:dannyrollo4@gmail.com">dannyrollo4@gmail.com</a>.</p>
-            <p>Connect with me on <a href="https://www.linkedin.com/in/danny-r-943861133/" target="_blank">LinkedIn</a> or view my work on <a href="https://github.com/bedrockdude10" target="_blank">GitHub</a>.</p>
-        </section>
+        <div class="tech-grid">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Claude API</span>
+            <span class="tech-tag">MCP Server</span>
+            <span class="tech-tag">NeMo Guardrails</span>
+            <span class="tech-tag">OpenTelemetry</span>
+            <span class="tech-tag">Streamlit</span>
+        </div>
+
+        <div class="arch-diagram"><span class="node">User Query</span>
+    <span class="arrow">│</span>
+    <span class="arrow">▼</span>
+<span class="node">Coordinator Agent</span> <span class="label">← routes to specialist based on intent</span>
+    <span class="arrow">├──▶</span> <span class="node">Artist Agent</span>      <span class="label">← genre matching, availability</span>
+    <span class="arrow">├──▶</span> <span class="node">Venue Agent</span>       <span class="label">← capacity, location, pricing</span>
+    <span class="arrow">└──▶</span> <span class="node">Booking Agent</span>     <span class="label">← scheduling, conflict resolution</span>
+    <span class="arrow">│</span>
+    <span class="arrow">▼</span>
+<span class="node">3-Tier Memory</span>: conversation │ working │ preferences
+<span class="node">MCP Server</span>: standardized tool interop
+<span class="node">NeMo Guardrails</span>: safety + compliance layer
+<span class="node">OpenTelemetry</span>: observability + tracing</div>
+
+        <div class="project-details">
+            <h4>Key Design Decisions</h4>
+            <ul class="detail-list">
+                <li>Coordinator pattern with bounded iterations prevents runaway agent loops</li>
+                <li>MCP server provides standardized tool interface across all agents</li>
+                <li>3-tier memory (conversation, working, preferences) enables context-aware multi-turn interactions</li>
+                <li>NeMo Guardrails enforce content safety and domain boundaries at inference time</li>
+                <li>Structured tool use with Claude API for reliable, typed agent-to-tool communication</li>
+            </ul>
+        </div>
+
+        <div class="embed-container">
+            <iframe 
+                src="https://booker-hjbdoiu5fobsifeuwwnpsg.streamlit.app/?embedded=true"
+                title="Booker Live Demo"
+            ></iframe>
+        </div>
+
+        <div class="project-links">
+            <a href="https://github.com/bedrockdude10/booker" target="_blank">GitHub →</a>
+            <a href="https://booker-hjbdoiu5fobsifeuwwnpsg.streamlit.app/" target="_blank">Live Demo →</a>
+        </div>
     </div>
 
-    <footer>
-        <p>&copy; 2024 Danny Rollo. All Rights Reserved.</p>
-    </footer>
+    <!-- Attention Translation -->
+    <div class="project fade-in">
+        <div class="project-header">
+            <h3>Attention-Based Machine Translation</h3>
+            <span class="project-type type-dl">Deep Learning</span>
+        </div>
+        <p class="project-subtitle">Seq2seq encoder-decoder with Bahdanau and multi-head attention for Spanish→English translation, built from scratch in PyTorch.</p>
+
+        <div class="tech-grid">
+            <span class="tech-tag">PyTorch</span>
+            <span class="tech-tag">Bahdanau Attention</span>
+            <span class="tech-tag">Multi-Head Attention</span>
+            <span class="tech-tag">Encoder-Decoder</span>
+            <span class="tech-tag">BLEU Scoring</span>
+        </div>
+
+        <div class="project-details">
+            <h4>Architecture & Results</h4>
+            <ul class="detail-list">
+                <li>Implemented Bahdanau (additive) and multi-head attention mechanisms from first principles</li>
+                <li>Encoder: bidirectional GRU producing context vectors; Decoder: GRU with attention over encoder outputs</li>
+                <li>Achieved 81% accuracy on Spanish→English translation benchmark</li>
+                <li>Built attention heatmap visualizations showing learned alignment patterns</li>
+                <li>Compared additive vs. scaled dot-product attention tradeoffs empirically</li>
+            </ul>
+        </div>
+
+        <div class="project-links">
+            <a href="https://github.com/bedrockdude10/attention-translation" target="_blank">GitHub →</a>
+            <!-- <a href="#">Attention Visualizations →</a> -->
+        </div>
+    </div>
+
+    <!-- PlateMate -->
+    <div class="project fade-in">
+        <div class="project-header">
+            <h3>PlateMate</h3>
+            <span class="project-type type-product">Startup · ML Product</span>
+        </div>
+        <p class="project-subtitle">AI-powered food recommendation platform using collaborative filtering, RAG-based semantic search, and vector similarity over restaurant reviews.</p>
+
+        <div class="tech-grid">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">MongoDB Atlas Vector Search</span>
+            <span class="tech-tag">Sentence Transformers</span>
+            <span class="tech-tag">Collaborative Filtering</span>
+            <span class="tech-tag">RAG Pipeline</span>
+            <span class="tech-tag">AWS S3</span>
+            <span class="tech-tag">React</span>
+        </div>
+
+        <div class="project-details">
+            <h4>Technical Highlights</h4>
+            <ul class="detail-list">
+                <li>Hybrid recommendation engine: item-based collaborative filtering + semantic vector search</li>
+                <li>RAG pipeline with <code>all-mpnet-base-v2</code> embeddings (768-dim) for natural language dish queries</li>
+                <li>Query parsing into semantic + structured filters with geo-aware retrieval</li>
+                <li>User-item interaction matrix for personalized collaborative filtering scores</li>
+                <li>CTO — leading architecture decisions, ML pipeline design, and team of engineers</li>
+            </ul>
+        </div>
+
+        <div class="project-links">
+            <a href="https://github.com/PlateMate-App" target="_blank">GitHub →</a>
+        </div>
+    </div>
+
+    <!-- Cancer Classification -->
+    <div class="project fade-in">
+        <div class="project-header">
+            <h3>Cancer Cell Classification</h3>
+            <span class="project-type type-ml">Machine Learning</span>
+        </div>
+        <p class="project-subtitle">Multi-method classification pipeline for identifying cancer cells in gene expression data, comparing PCA, SVM, Random Forest, and neural approaches.</p>
+
+        <div class="tech-grid">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">Scikit-learn</span>
+            <span class="tech-tag">PCA</span>
+            <span class="tech-tag">SVM</span>
+            <span class="tech-tag">Random Forest</span>
+            <span class="tech-tag">Pandas</span>
+        </div>
+
+        <div class="project-details">
+            <h4>Approach</h4>
+            <ul class="detail-list">
+                <li>Dimensionality reduction via PCA on high-dimensional gene expression features</li>
+                <li>Compared SVM, Random Forest, and logistic regression on cancer/non-cancer classification</li>
+                <li>Evaluated precision-recall tradeoffs critical for medical classification tasks</li>
+                <li>Completed for Matrix Methods in Machine Learning & Data Analysis</li>
+            </ul>
+        </div>
+
+        <div class="project-links">
+            <a href="https://github.com/Bedrockdude10/Cancer-Classification-Project" target="_blank">GitHub →</a>
+        </div>
+    </div>
+
+</div>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<div class="section">
+    <div class="section-label">Experience</div>
+    <div class="compact-section">
+        <div class="compact-card">
+            <h4>Teradata</h4>
+            <div class="meta">AI/ML Product Management Intern · 2025–2026</div>
+            <p>Delivered business case for AI Code Assistant product. Defined requirements with cross-functional stakeholders and oversaw multiple product iterations on agentic AI development tools.</p>
+        </div>
+        <div class="compact-card">
+            <h4>LineVision</h4>
+            <div class="meta">Software Engineer Co-op · 2024</div>
+            <p>Owned internal web app, expanded APIs and database schema, improved data pipeline performance by 1000x for staff scientists.</p>
+        </div>
+        <div class="compact-card">
+            <h4>PlateMate</h4>
+            <div class="meta">Co-Founder & CTO · 2024–Present</div>
+            <p>Leading ML architecture and engineering for AI-powered food recommendation platform. Collaborative filtering, RAG search, vector similarity.</p>
+        </div>
+        <div class="compact-card">
+            <h4>Northeastern University</h4>
+            <div class="meta">Lead Lab TA · 2022–2025</div>
+            <p>Led weekly labs for 40+ students in Fundamentals of Computer Science 1 & 2. Conducted office hours and graded assignments.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ EDUCATION ═══ -->
+<div class="section">
+    <div class="section-label">Education</div>
+    <div class="compact-section">
+        <div class="compact-card">
+            <h4>Northeastern University</h4>
+            <div class="meta">M.S. Computer Science · May 2026</div>
+            <p>Applied Deep Learning, Deep Learning, Machine Learning, Advanced Machine Learning, Matrix Methods in ML, Algorithms</p>
+        </div>
+        <div class="compact-card">
+            <h4>Northeastern University</h4>
+            <div class="meta">B.S. Computer Science & Mathematics · May 2025</div>
+            <p>AI4Impact, Web Development, Computer Graphics, Systems Security, Object-Oriented Design, Statistics & Stochastic Processes</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+    <p>Danny Rollo · <a href="mailto:dannyrollo4@gmail.com">dannyrollo4@gmail.com</a> · <a href="https://www.linkedin.com/in/danny-r-943861133/" target="_blank">LinkedIn</a> · <a href="https://github.com/bedrockdude10" target="_blank">GitHub</a></p>
+    <p style="margin-top: 0.5rem;">&copy; 2026</p>
+</footer>
+
 </body>
 </html>
