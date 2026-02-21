@@ -19,7 +19,7 @@
         </p>
         <div class="status">Available June 2026 · NYC Metro</div>
         <div class="hero-links">
-            <a href="mailto:dannyrollo4@gmail.com">Email</a>
+            <a href="/cdn-cgi/l/email-protection#2440454a4a5d564b48484b10644349454d480a474b49">Email</a>
             <a href="https://www.linkedin.com/in/danny-r-943861133/" target="_blank">LinkedIn</a>
             <a href="https://github.com/bedrockdude10" target="_blank">GitHub</a>
             <a href="media/Danny_Rollo_Resume.pdf" target="_blank">Resume ↗</a>
@@ -37,11 +37,14 @@
             <h3>Booker</h3>
             <span class="project-type type-agentic">Agentic AI</span>
         </div>
-        <p class="project-subtitle">Multi-agent system for autonomous artist–venue matching with production-grade orchestration, memory, and safety guardrails.</p>
+        <p class="project-subtitle">Multi-agent system for autonomous artist–venue matching with production-grade orchestration, semantic vector search, memory management, and safety guardrails.</p>
 
         <div class="tech-grid">
             <span class="tech-tag">Python</span>
             <span class="tech-tag">Claude API</span>
+            <span class="tech-tag">Go Backend</span>
+            <span class="tech-tag">MongoDB Atlas Vector Search</span>
+            <span class="tech-tag">Sentence Transformers</span>
             <span class="tech-tag">MCP Server</span>
             <span class="tech-tag">NeMo Guardrails</span>
             <span class="tech-tag">OpenTelemetry</span>
@@ -54,7 +57,7 @@
 <span class="node">Coordinator Agent</span> <span class="label">← routes to specialist based on intent</span>
     <span class="arrow">├──▶</span> <span class="node">Artist Agent</span>      <span class="label">← genre matching, availability</span>
     <span class="arrow">├──▶</span> <span class="node">Venue Agent</span>       <span class="label">← capacity, location, pricing</span>
-    <span class="arrow">└──▶</span> <span class="node">Booking Agent</span>     <span class="label">← scheduling, conflict resolution</span>
+    <span class="arrow">└──▶</span> <span class="node">Booking Advisor</span>  <span class="label">← synthesizes recommendations</span>
     <span class="arrow">│</span>
     <span class="arrow">▼</span>
 <span class="node">3-Tier Memory</span>: conversation │ working │ preferences
@@ -66,10 +69,11 @@
             <h4>Key Design Decisions</h4>
             <ul class="detail-list">
                 <li>Coordinator pattern with bounded iterations prevents runaway agent loops</li>
-                <li>MCP server provides standardized tool interface across all agents</li>
+                <li>MongoDB Atlas Vector Search with <code>all-mpnet-base-v2</code> embeddings (768-dim) for semantic artist/venue discovery by vibe and description</li>
                 <li>3-tier memory (conversation, working, preferences) enables context-aware multi-turn interactions</li>
                 <li>NeMo Guardrails enforce content safety and domain boundaries at inference time</li>
                 <li>Structured tool use with Claude API for reliable, typed agent-to-tool communication</li>
+                <li>MCP server for Claude Desktop integration with standardized tool interop</li>
             </ul>
         </div>
 
@@ -81,7 +85,7 @@
         </div>
 
         <div class="project-links">
-            <a href="https://github.com/bedrockdude10/booker" target="_blank">GitHub →</a>
+            <a href="https://github.com/Bedrockdude10/Booker/tree/main/agent-demo" target="_blank">GitHub →</a>
             <a href="https://booker-hjbdoiu5fobsifeuwwnpsg.streamlit.app/" target="_blank">Live Demo →</a>
         </div>
     </div>
@@ -233,9 +237,4 @@
 
 <!-- ═══ FOOTER ═══ -->
 <footer>
-    <p>Danny Rollo · <a href="mailto:dannyrollo4@gmail.com">dannyrollo4@gmail.com</a> · <a href="https://www.linkedin.com/in/danny-r-943861133/" target="_blank">LinkedIn</a> · <a href="https://github.com/bedrockdude10" target="_blank">GitHub</a></p>
-    <p style="margin-top: 0.5rem;">&copy; 2026</p>
-</footer>
-
-</body>
-</html>
+    <p>Danny Rollo · <a href="/cdn-cgi/l/email-protection#98fcf9f6f6e1eaf7f4f4f7acd8fff5f9f1f4b6fbf7f5"><span class="__cf_email__" data-cfemail="0c686d6262757e63606063384c6b616d6560226f6361">[email&#160;protected]</span></a> · <a href="https://www.linkedin.com/in/danny-r-943861133/"
