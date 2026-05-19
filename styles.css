@@ -220,6 +220,11 @@ body::before {
     background: var(--coral-soft);
 }
 
+.type-research {
+    color: #b8956a;
+    background: rgba(184, 149, 106, 0.10);
+}
+
 .project-subtitle {
     color: var(--text-muted);
     font-size: 0.95rem;
@@ -299,6 +304,22 @@ body::before {
 .project-links a:hover {
     background: var(--accent-soft);
     border-color: var(--accent);
+}
+
+/* ─── Project figure ─── */
+.project-figure {
+    margin: 1.5rem 0;
+}
+.project-figure img {
+    width: 100%;
+    border-radius: 4px;
+    display: block;
+}
+.project-figure figcaption {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    font-style: italic;
 }
 
 /* ─── Architecture diagram ─── */

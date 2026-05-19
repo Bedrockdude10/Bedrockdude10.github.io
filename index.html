@@ -15,7 +15,7 @@
         <div class="hero-label">Machine Learning Engineer</div>
         <h1>Danny Rollo<br><span class="highlight">builds intelligent systems.</span></h1>
         <p class="hero-bio">
-            MS Computer Science @ Northeastern (May 2026). I build agentic AI systems, deep learning models, and production ML pipelines. Currently exploring how autonomous agents can operate responsibly at scale.
+            MS Computer Science @ Northeastern (May 2026). I build deep learning models and ML systems, with a focus on applied research across healthcare, recommendations, music, and language.
         </p>
         <div class="status">Available June 2026 · NYC Metro</div>
         <div class="hero-links">
@@ -30,6 +30,52 @@
 <!-- ═══ PROJECTS ═══ -->
 <div class="section">
     <div class="section-label">Featured Projects</div>
+
+    <!-- Nucleus Segmentation -->
+    <div class="project fade-in">
+        <div class="project-header">
+            <h3>Lightweight CNN Encoders for Nucleus Segmentation</h3>
+            <span class="project-type type-research">Research · Healthcare ML</span>
+        </div>
+        <p class="project-subtitle">Controlled encoder ablation showing a 34M-param VGG U-Net matches MedT (a transformer purpose-built for small medical datasets) and outperforms pretrained Swin-T on nucleus segmentation in the low-data regime.</p>
+
+        <div class="tech-grid">
+            <span class="tech-tag">PyTorch</span>
+            <span class="tech-tag">U-Net</span>
+            <span class="tech-tag">Swin Transformer</span>
+            <span class="tech-tag">ResNet</span>
+            <span class="tech-tag">VGG</span>
+            <span class="tech-tag">Medical Imaging</span>
+            <span class="tech-tag">PanNuke / MoNuSeg</span>
+            <span class="tech-tag">timm</span>
+        </div>
+
+        <div class="project-details">
+            <h4>Key Findings</h4>
+            <ul class="detail-list">
+                <li>VGG U-Net (Dice 0.851) matches ResNet and beats pretrained Swin-T by 4.9 Dice points on PanNuke (5K patches, 19 tissue types)</li>
+                <li>On MoNuSeg (37 training WSIs), VGG reaches Dice 0.796 — equivalent to MedT's published number with a ~24× larger param budget but no specialized attention mechanism</li>
+                <li>Pareto-dominant on inference cost: 2.6× less memory and 1.8× lower latency than Swin-T at equal-or-better accuracy</li>
+                <li>Hypothesized mechanism: spatial-resolution preservation at skip connections + convolutional inductive bias outweighs Swin's pretraining advantage in low-data regime</li>
+                <li>Implications for edge-deployed microscopy, veterinary/rare-disease research, and non-H&E staining where foundation model pretraining misaligns</li>
+            </ul>
+        </div>
+
+        <figure class="project-figure">
+            <img src="media/monuseg_comparison.png" alt="Qualitative comparison on MoNuSeg test images: input H&E patch, ground truth (green), VGG prediction, and Swin prediction with per-image Dice scores.">
+            <figcaption>Qualitative comparison on MoNuSeg test images. VGG produces tighter boundary delineation; Swin over-segments dense regions and misses isolated nuclei in sparse ones.</figcaption>
+        </figure>
+
+        <figure class="project-figure">
+            <img src="media/training_curves.png" alt="Training and validation Dice score curves across encoder architectures (VGG, ResNet, Swin-T) over training epochs on PanNuke and MoNuSeg.">
+            <figcaption>Training curves across encoder architectures. VGG converges smoothly; Swin-T shows higher variance and slower convergence in the low-data regime.</figcaption>
+        </figure>
+
+        <div class="project-links">
+            <a href="media/final_report.pdf" target="_blank">Paper (PDF) →</a>
+            <a href="https://github.com/Bedrockdude10/BinaryCellSegmentation" target="_blank">GitHub →</a>
+        </div>
+    </div>
 
     <!-- BOOKER -->
     <div class="project fade-in">
