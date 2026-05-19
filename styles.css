@@ -322,6 +322,19 @@ body::before {
     font-style: italic;
 }
 
+.project-meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 1rem 0 0.5rem;
+    font-style: italic;
+}
+
+.link-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 /* ─── Architecture diagram ─── */
 .arch-diagram {
     margin: 1.5rem 0;

@@ -31,6 +31,59 @@
 <div class="section">
     <div class="section-label">Featured Projects</div>
 
+    <!-- PlateMate Two-Tower -->
+    <div class="project fade-in">
+        <div class="project-header">
+            <h3>Two-Tower Recommendation with Cold Start Ablation</h3>
+            <span class="project-type type-research">Research · Recommender Systems</span>
+        </div>
+        <p class="project-subtitle">Found that context features alone outperform the full model on cold-start users by 4.2 NDCG@10 points, while content features remain essential for cold restaurants. A 12-experiment ablation on a Two-Tower dual encoder over 1.3M Yelp reviews.</p>
+
+        <div class="tech-grid">
+            <span class="tech-tag">PyTorch</span>
+            <span class="tech-tag">Two-Tower</span>
+            <span class="tech-tag">BPR Loss</span>
+            <span class="tech-tag">Cold Start</span>
+            <span class="tech-tag">Yelp Dataset</span>
+            <span class="tech-tag">Ablation Study</span>
+            <span class="tech-tag">NDCG / Hit@K</span>
+            <span class="tech-tag">Gumbel-max Sampling</span>
+        </div>
+
+        <div class="project-details">
+            <h4>Key Findings</h4>
+            <ul class="detail-list">
+                <li><strong>Cold users:</strong> context-only model (day-of-week, distance, restaurant temporal profiles) achieves NDCG@10 of 29.0% — beats the full model's 24.8% and the popularity baseline by 27.2 pp</li>
+                <li><strong>Cold restaurants:</strong> content features are essential — dropping user preferences collapses NDCG@10 from 9.3% → 3.6%; popularity scores 0% by design (no training reviews)</li>
+                <li><strong>Asymmetric feature importance:</strong> dropping user preferences <em>improves</em> cold user performance (24.8% → 28.9%) but cuts cold restaurant performance in half — sparse preference estimates are noisier than situational context</li>
+                <li><strong>Checkin-matched visit times</strong> (UTC → local via per-state IANA timezone mapping) lift warm NDCG@10 by 1.7 pp and cold user by 1.9 pp</li>
+                <li><strong>Gated fusion underperforms on cold restaurants:</strong> content-gated interactions learned on training restaurants don't transfer to unseen ones</li>
+            </ul>
+        </div>
+
+        <div class="project-details">
+            <h4>Engineering Highlights</h4>
+            <ul class="detail-list">
+                <li>On-device feature indexing (no DataLoader, no CPU↔GPU transfer per batch); per-epoch resampling of geographic negatives and Gumbel-max onboarding selections as free data augmentation</li>
+                <li>Leave-one-out onboarding evaluation prevents information leakage when cold users' only signal comes from test reviews</li>
+                <li>4-stage data pipeline (extract → preprocess → split → feature prep) with iterative interaction-density filtering and stratified cold start holdout</li>
+                <li>Vectorized dataset construction dropped from 47s to 8s via numpy bulk operations</li>
+            </ul>
+        </div>
+
+        <figure class="project-figure">
+            <img src="media/platemate_ablation.png" alt="Ablation results across warm, cold restaurant, and cold user splits showing how feature combinations affect each cold start scenario.">
+            <figcaption>Ablation results across three test splits. Context features dominate cold users; content features dominate cold restaurants.</figcaption>
+        </figure>
+
+        <p class="project-meta">Team of 4 · Primary contributor & project lead — contributed across both towers, pipeline architecture, checkin temporal profiles, and geographic negative sampling</p>
+
+        <div class="project-links">
+            <a href="#" aria-disabled="true" title="Paper draft in progress" class="link-disabled">Paper (coming soon) →</a>
+            <a href="https://github.com/Bedrockdude10/cs7180-platemate" target="_blank">GitHub →</a>
+        </div>
+    </div>
+
     <!-- Nucleus Segmentation -->
     <div class="project fade-in">
         <div class="project-header">
