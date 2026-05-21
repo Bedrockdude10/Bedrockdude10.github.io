@@ -130,6 +130,49 @@
         </div>
     </div>
 
+    <!-- RailMax -->
+    <div class="project fade-in">
+        <div class="project-header">
+            <h3>RailMax</h3>
+            <span class="project-type type-ml">Machine Learning · Public Transit</span>
+        </div>
+        <p class="project-subtitle">Interpretable ML model (EBM) predicting annual ridership at ~500 US Amtrak stations and surfacing where increased service would have the greatest impact — with an interactive map for exploring underservice ratios and running what-if frequency scenarios.</p>
+
+        <div class="tech-grid">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">EBM (InterpretML)</span>
+            <span class="tech-tag">Gradient Boosting</span>
+            <span class="tech-tag">GTFS</span>
+            <span class="tech-tag">US Census ACS</span>
+            <span class="tech-tag">Folium</span>
+            <span class="tech-tag">Stratified Group CV</span>
+            <span class="tech-tag">Streamlit</span>
+        </div>
+
+        <div class="project-details">
+            <h4>Key Findings</h4>
+            <ul class="detail-list">
+                <li>EBM achieves R² = 0.76 / RMSE 0.84 (log scale) via 5-fold stratified group cross-validation, with stations clustered geographically to prevent leakage between nearby stops</li>
+                <li>Interactive map colors every Amtrak station by demand ratio (actual ÷ predicted ridership) and lets users adjust weekly departures to estimate ridership impact</li>
+                <li>Features span 6 categories: geography, intermodal connectivity, service frequency, demographics (ACS), land use (colleges, tourism), and station type</li>
+                <li>Identified top-20 city pairs most likely to benefit from increased service frequency</li>
+                <li>Major hubs (NYC Penn, Chicago Union) systematically underpredicted — documented as a known limitation of additive cross-sectional modeling at convergence points</li>
+            </ul>
+        </div>
+
+        <div class="embed-container">
+            <iframe
+                src="https://bedrockdude10.github.io/RailMax/results/underservice_map.html"
+                title="RailMax Interactive Underservice Map"
+            ></iframe>
+        </div>
+
+        <div class="project-links">
+            <a href="https://github.com/Bedrockdude10/RailMax" target="_blank">GitHub →</a>
+            <a href="https://bedrockdude10.github.io/RailMax/results/underservice_map.html" target="_blank">Interactive Map →</a>
+        </div>
+    </div>
+
     <!-- BOOKER -->
     <div class="project fade-in">
         <div class="project-header">
