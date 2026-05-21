@@ -310,7 +310,8 @@ body::before {
 .project-figure {
     margin: 1.5rem 0;
 }
-.project-figure img {
+.project-figure img,
+.project-figure video {
     width: 100%;
     border-radius: 4px;
     display: block;
@@ -320,6 +321,17 @@ body::before {
     color: var(--text-muted);
     margin-top: 0.5rem;
     font-style: italic;
+}
+
+/* ─── Side-by-side video pair ─── */
+.video-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+@media (max-width: 640px) {
+    .video-pair { grid-template-columns: 1fr; }
 }
 
 .project-meta {

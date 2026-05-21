@@ -130,6 +130,53 @@
         </div>
     </div>
 
+    <!-- Flow Matching Robotics -->
+    <div class="project fade-in">
+        <div class="project-header">
+            <h3>Flow Matching for Robotic Manipulation</h3>
+            <span class="project-type type-dl">Research · Robotics</span>
+        </div>
+        <p class="project-subtitle">Imitation learning via continuous-time flow matching on MuJoCo/MetaWorld bin-picking — a neural vector field transports Gaussian noise to expert action distributions via ODE integration. Scales from a proprioceptive single-object baseline to RGBD+language-conditioned action chunking across 3-object scenes.</p>
+
+        <div class="tech-grid">
+            <span class="tech-tag">PyTorch</span>
+            <span class="tech-tag">Flow Matching</span>
+            <span class="tech-tag">MuJoCo</span>
+            <span class="tech-tag">MetaWorld</span>
+            <span class="tech-tag">Imitation Learning</span>
+            <span class="tech-tag">Action Chunking</span>
+            <span class="tech-tag">CNN (RGBD)</span>
+            <span class="tech-tag">RK2 ODE Solver</span>
+        </div>
+
+        <div class="project-details">
+            <h4>Approach & Findings</h4>
+            <ul class="detail-list">
+                <li><strong>Flow matching policy:</strong> vector field maps (observation, noisy action, flow time τ) → velocity; RK2 integrates from τ=0→1 at inference to produce clean action samples without diffusion's iterative denoising cost</li>
+                <li><strong>Baseline (expt_1):</strong> proprioception-only MLP trained on 100 scripted demos achieves reliable single-object bin-picking — validates the flow matching objective on a tractable case (see demo)</li>
+                <li><strong>Multi-modal scaling (expt_4):</strong> RGBD CNN encoder + per-object text embedding extends the policy to 3-object scenes; 400 demos required to cover combinatorial object arrangements</li>
+                <li><strong>Action chunking (expt_6):</strong> predicts 8 consecutive actions (d_act 4→32) to improve temporal coherence; compounding error on the harder 3-object task highlights open generalization challenges</li>
+            </ul>
+        </div>
+
+        <div class="video-pair">
+            <figure class="project-figure">
+                <video src="media/expt_1_demo.webm" controls muted loop playsinline></video>
+                <figcaption>Baseline (expt_1): proprioception-only policy completes single-object bin-picking from 100 scripted demos.</figcaption>
+            </figure>
+            <figure class="project-figure">
+                <video src="media/action_chunking_demo.mp4" controls muted loop playsinline></video>
+                <figcaption>Action chunking (expt_6): 8-step prediction on the harder 3-object task — temporal coherence improves over single-step, but 3-object generalization is an open problem.</figcaption>
+            </figure>
+        </div>
+
+        <p class="project-meta">Team of 3</p>
+
+        <div class="project-links">
+            <a href="https://github.com/Bedrockdude10/cs7180-final-project" target="_blank">GitHub →</a>
+        </div>
+    </div>
+
     <!-- RailMax -->
     <div class="project fade-in">
         <div class="project-header">
