@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<!-- {{ banner }} -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ identity.site_title }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+    <div class="hero-inner fade-in">
+        <div class="hero-label">{{ identity.role }}</div>
+        <h1>{{ identity.headline }}<br><span class="highlight">{{ identity.headline_accent }}</span></h1>
+        <p class="hero-bio">
+            {{ identity.hero_bio }}
+        </p>
+        <div class="status">{{ identity.availability }}</div>
+        <div class="hero-links">
+            <a href="mailto:{{ identity.email }}">Email</a>
+            <a href="{{ identity.linkedin }}" target="_blank">LinkedIn</a>
+            <a href="{{ identity.github }}" target="_blank">GitHub</a>
+            <a href="{{ identity.cv_pdf }}" class="link-primary" download>Download CV (PDF) ↓</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ PUBLICATIONS ═══ -->
+<div class="section">
+    <div class="section-label">Publications</div>
+
+{% for pub in publications %}
+    <div class="pub fade-in">
+        <div class="pub-venue">
+            <span class="pub-badge{% if not pub.peer_reviewed %} pub-badge-draft{% endif %}">{{ pub.venue_short }}</span>
+{% if pub.status %}
+            <span class="pub-status">{{ pub.status }}</span>
+{% endif %}
+        </div>
+        <h3 class="pub-title">{{ pub.title }}</h3>
+        <p class="pub-authors">{{ pub.authors | md }}</p>
+        <p class="pub-note">
+{% if pub.peer_reviewed %}
+            {{ pub.venue }}, {{ pub.year }}. {{ pub.summary | md }}
+{% else %}
+            {{ pub.venue }}. {{ pub.summary | md }}
+{% endif %}
+        </p>
+        <div class="project-links">
+{% for link in pub.links %}
+            <a href="{{ link.href }}"{% if link.external %} target="_blank"{% endif %}>{{ link.label }} →</a>
+{% endfor %}
+{% if pub.site_anchor %}
+            <a href="{{ pub.site_anchor }}">Details below ↓</a>
+{% endif %}
+        </div>
+    </div>
+
+{% endfor %}
+    <p class="pub-cv-line">
+        Full academic record — education, research, teaching, honors —
+        <a href="{{ identity.cv_pdf }}" download>download the CV (PDF)</a>.
+    </p>
+</div>
+
+<!-- ═══ PROJECTS ═══ -->
+<div class="section">
+    <div class="section-label">Featured Projects</div>
+
+{% for p in projects %}
+    <!-- {{ p.title }} -->
+    <div class="project fade-in"{% if p.site_id %} id="{{ p.site_id }}"{% endif %}>
+        <div class="project-header">
+            <h3>{{ p.title }}</h3>
+            <span class="project-type {{ p.tag_class }}">{{ p.tag }}</span>
+        </div>
+        <p class="project-subtitle">{{ p.subtitle | md }}</p>
+
+        <div class="tech-grid">
+{% for t in p.tech %}
+            <span class="tech-tag">{{ t }}</span>
+{% endfor %}
+        </div>
+
+{% for block in p.media if block.position == 'before_details' %}
+{% if block.type == 'raw' %}
+{{ block.html }}
+{% endif %}
+{% endfor %}
+{% for group in p.detail_groups %}
+        <div class="project-details">
+            <h4>{{ group.heading }}</h4>
+            <ul class="detail-list">
+{% for item in group['items'] %}
+                <li>{{ item | md }}</li>
+{% endfor %}
+            </ul>
+        </div>
+
+{% endfor %}
+{% for block in p.media if block.position != 'before_details' %}
+{% if block.type == 'figure' %}
+        <figure class="project-figure">
+            <img src="{{ block.src }}" alt="{{ block.alt }}">
+            <figcaption>{{ block.caption }}</figcaption>
+        </figure>
+
+{% elif block.type == 'video_pair' %}
+        <div class="video-pair">
+{% for v in block.videos %}
+            <figure class="project-figure">
+                <video src="{{ v.src }}" controls muted loop playsinline></video>
+                <figcaption>{{ v.caption }}</figcaption>
+            </figure>
+{% endfor %}
+        </div>
+
+{% elif block.type == 'embed' %}
+        <div class="embed-container">
+            <iframe
+                src="{{ block.src }}"
+                title="{{ block.title }}"
+            ></iframe>
+        </div>
+
+{% endif %}
+{% endfor %}
+{% if p.meta %}
+        <p class="project-meta">{{ p.meta }}</p>
+
+{% endif %}
+        <div class="project-links">
+{% for link in p.links %}
+{% if link.disabled %}
+            <a href="{{ link.href }}" aria-disabled="true" title="{{ link.title }}" class="link-disabled">{{ link.label }} →</a>
+{% else %}
+            <a href="{{ link.href }}"{% if link.external %} target="_blank"{% endif %}>{{ link.label }} →</a>
+{% endif %}
+{% endfor %}
+        </div>
+    </div>
+
+{% endfor %}
+</div>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<div class="section">
+    <div class="section-label">Experience</div>
+    <div class="compact-section">
+{% for e in site_experience %}
+        <div class="compact-card">
+            <h4>{{ e.org_short | default(e.org, true) }}</h4>
+            <div class="meta">{{ e.title_short | default(e.title, true) }} · {{ e.date_short }}</div>
+            <p>{{ e.site_summary | md }}</p>
+        </div>
+{% endfor %}
+    </div>
+</div>
+
+<!-- ═══ EDUCATION ═══ -->
+<div class="section">
+    <div class="section-label">Education</div>
+    <div class="compact-section">
+{% for ed in education %}
+        <div class="compact-card">
+            <h4>{{ ed.institution }}</h4>
+            <div class="meta">{{ ed.degree_short }} · {{ ed.date_short }}</div>
+            <p>{{ ed.coursework }}</p>
+        </div>
+{% endfor %}
+    </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+    <p>
+        {{ identity.name }} ·
+        <a href="mailto:{{ identity.email }}">{{ identity.email }}</a> ·
+        <a href="{{ identity.linkedin }}" target="_blank">LinkedIn</a> ·
+        <a href="{{ identity.github }}" target="_blank">GitHub</a> ·
+        <a href="{{ identity.cv_pdf }}" download>CV (PDF)</a>
+    </p>
+</footer>
+
+</body>
+</html>

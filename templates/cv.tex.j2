@@ -1,0 +1,151 @@
+<% set fontsize = '11pt' %>
+<% set margin = '0.85in' %>
+<% set section_before = '1.1em' %>
+<% set section_after = '0.6em' %>
+<% set show_footer = true %>
+<% set doc_name = 'Curriculum Vitae' %>
+<% include '_preamble.tex.j2' %>
+
+\begin{document}
+
+% ══════════════ HEADER ══════════════
+<% include '_header.tex.j2' %>
+
+% ══════════════ RESEARCH INTERESTS ══════════════
+\section{Research Interests}
+<< research_interests | tex >>
+
+% ══════════════ EDUCATION ══════════════
+<% for ed in education %>
+<% if loop.first %>
+\section{Education}
+\entry{<< ed.institution | tex >>}{<< ed.location | tex >>}
+<% endif %>
+\subentry{<< ed.degree | tex >>}{<< ed.date | tex >>}
+<% if loop.first %>
+\vspace{0.15em}
+<% endif %>
+<% endfor %>
+\begin{itemize}
+<% for ed in education %>
+    \item \textit{<< ed.coursework_label | tex >>:} << ed.coursework | tex >>
+<% endfor %>
+\end{itemize}
+
+% ══════════════ PUBLICATIONS ══════════════
+\section{Publications}
+<% if pubs_reviewed %>
+\noindent\textbf{Peer-Reviewed Conference}
+\begin{enumerate}[leftmargin=1.6em,itemsep=4pt,topsep=3pt]
+<% for pub in pubs_reviewed %>
+    \item << pub.authors_cv | md >> ``<< pub.title | tex >>.''
+          \textit{<< pub.venue | tex >>}, << pub.year >>. \textbf{<< pub.status_cv | tex >>}
+          \\[0.15em]
+          {\small << pub.summary | md >>}
+<% endfor %>
+\end{enumerate}
+<% endif %>
+<% if pubs_draft %>
+
+\vspace{0.5em}
+\noindent\textbf{In Preparation}
+\begin{enumerate}[leftmargin=1.6em,itemsep=4pt,topsep=3pt,resume]
+<% for pub in pubs_draft %>
+    \item << pub.authors_cv | md >> ``<< pub.title | tex >>.''
+          \textit{<< pub.venue | tex >>.}
+          \\[0.15em]
+          {\small << pub.summary | md >>}
+<% endfor %>
+\end{enumerate}
+<% endif %>
+
+% ══════════════ RESEARCH EXPERIENCE ══════════════
+\section{Research Experience}
+
+<% for p in cv_projects %>
+\entry{<< (p.title_cv | default(p.title, true)) | tex >>}{<< p.dates | tex >>}
+\subentry{<< p.role_cv | tex >>}{<< p.stack_cv | tex >>}
+\begin{itemize}
+<% for b in p.cv_bullets %>
+    \item << b | md >>
+<% endfor %>
+\end{itemize}
+<% if not loop.last %>
+\vspace{0.4em}
+
+<% endif %>
+<% endfor %>
+
+% ══════════════ PROFESSIONAL EXPERIENCE ══════════════
+\section{Professional Experience}
+
+<% for e in experience %>
+<% if e.roles %>
+\entry{<< (e.org_cv | default(e.org, true)) | tex >>}{<< e.date | tex >>}
+<% else %>
+\entry{<< (e.org_cv | default(e.org, true)) | tex >> --- << e.title | tex >>}{<< e.date | tex >>}
+<% endif %>
+\subentry{<< e.location | tex >>}{}
+<% if e.roles %>
+<% for r in e.roles %>
+\noindent{}\textit{<< r.title | tex >>}\hfill{\small << r.date | tex >>}\par
+\begin{itemize}
+<% for b in r.bullets %>
+    \item << b | md >>
+<% endfor %>
+\end{itemize}
+<% endfor %>
+<% else %>
+\begin{itemize}
+<% for b in e.bullets %>
+    \item << b | md >>
+<% endfor %>
+\end{itemize}
+<% endif %>
+<% if not loop.last %>
+\vspace{0.4em}
+
+<% endif %>
+<% endfor %>
+
+% ══════════════ TEACHING ══════════════
+\section{Teaching Experience}
+<% for t in teaching %>
+\entry{<< t.org | tex >> --- << t.title | tex >>}{<< t.date | tex >>}
+\subentry{<< t.course | tex >>}{<< t.location | tex >>}
+\begin{itemize}
+<% for b in t.bullets %>
+    \item << b | md >>
+<% endfor %>
+\end{itemize}
+<% endfor %>
+
+% ══════════════ HONORS ══════════════
+\section{Honors \& Awards}
+<% for h in honors %>
+\entry{<< h.title | tex >>}{<< h.date | tex >>}
+{\small << h.note | md >>}\par
+<% if not loop.last %>
+\vspace{0.35em}
+<% endif %>
+<% endfor %>
+
+% ══════════════ SKILLS ══════════════
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0em,label={}]
+<% for s in skills %>
+    \item \textbf{<< s.label | tex >>:} << s['items'] | join(', ') | md >>
+<% endfor %>
+\end{itemize}
+
+% ══════════════ SERVICE ══════════════
+\section{Languages \& Activities}
+\begin{itemize}[leftmargin=0em,label={}]
+    \item \textbf{Languages:} << languages | tex >>
+    \item \textbf{Activities:} << activities | tex >>
+\end{itemize}
+
+\vspace{1em}
+\noindent{\small\color{gray} References available upon request.}
+
+\end{document}

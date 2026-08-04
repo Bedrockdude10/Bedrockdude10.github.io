@@ -134,6 +134,17 @@ body::before {
     background: var(--accent-soft);
 }
 
+/* Primary CTA — the CV download */
+.hero-links a.link-primary {
+    color: var(--text);
+    border-color: var(--accent);
+    background: var(--accent-soft);
+}
+
+.hero-links a.link-primary:hover {
+    background: var(--accent-glow);
+}
+
 /* ─── Section layout ─── */
 .section {
     max-width: 920px;
@@ -223,6 +234,14 @@ body::before {
 .type-research {
     color: #b8956a;
     background: rgba(184, 149, 106, 0.10);
+}
+
+/* Accepted publication — highest-signal badge on the page */
+.type-accepted {
+    color: var(--green);
+    background: var(--green-soft);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    font-weight: 700;
 }
 
 .project-subtitle {
@@ -379,6 +398,93 @@ body::before {
     height: 650px;
     border: none;
     display: block;
+}
+
+/* ─── Publications ─── */
+.pub {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent);
+    border-radius: 10px;
+    padding: 1.75rem 2rem;
+    margin-bottom: 1.25rem;
+    transition: all 0.3s;
+}
+
+.pub:hover {
+    background: var(--surface-hover);
+    border-color: var(--border);
+    border-left-color: var(--accent);
+}
+
+.pub-venue {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+}
+
+.pub-badge {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.3rem 0.7rem;
+    border-radius: 4px;
+    color: var(--green);
+    background: var(--green-soft);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.pub-badge-draft {
+    color: var(--text-muted);
+    background: transparent;
+    border-color: var(--border);
+    font-weight: 400;
+}
+
+.pub-status {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+}
+
+.pub-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.35rem;
+}
+
+.pub-authors {
+    font-size: 0.88rem;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+}
+
+.pub-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+}
+
+.pub-cv-line {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 1.75rem;
+}
+
+.pub-cv-line a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+}
+
+.pub-cv-line a:hover {
+    border-bottom-color: var(--accent);
 }
 
 /* ─── Experience / Education cards ─── */

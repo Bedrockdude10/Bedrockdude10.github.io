@@ -1,0 +1,837 @@
+# ════════════════════════════════════════════════════════════════════════════
+#  SINGLE SOURCE OF TRUTH — Danny Rollo
+#
+#  Everything on the website, in the CV, and in the resume comes from this
+#  file. Edit here, then run ./build.sh. Never edit index.html, cv.tex, or
+#  resume.tex directly — they are generated and your changes will be lost.
+#
+#  PROSE MARKUP — prose fields accept a tiny neutral markup that renders to
+#  both HTML and LaTeX:
+#      **bold**      *italic*      `code`
+#  Write real unicode (— · × ≤ ² →); the LaTeX escaper converts it.
+#
+#  METRICS — never type a number twice. Define it under `metrics:` and
+#  reference it in any prose field as {{ m.<group>.<key> }}.
+# ════════════════════════════════════════════════════════════════════════════
+
+identity:
+  name: Danny Rollo
+  role: Machine Learning Engineer
+  site_title: Danny Rollo — ML Engineer
+  # Hero headline is split so the second half can take the gradient treatment.
+  headline: Danny Rollo
+  headline_accent: builds intelligent systems.
+  hero_bio: >-
+    MS Computer Science @ Northeastern (May 2026). I build deep learning models
+    and ML systems — motivated by the belief that the best ML work makes the
+    world a better place.
+  availability: Available June 2026 · NYC Metro
+  location_cv: Boston, MA · NYC Metro (from June 2026)
+  phone: 609-686-9411
+  email: dannyrollo4@gmail.com
+  email_academic: rollo.l@northeastern.edu
+  website: bedrockdude10.github.io
+  website_url: https://bedrockdude10.github.io
+  github: https://github.com/bedrockdude10
+  github_short: github.com/bedrockdude10
+  linkedin: https://www.linkedin.com/in/danny-r-943861133/
+  linkedin_short: linkedin.com/in/danny-r
+  cv_pdf: media/Danny_Rollo_CV.pdf
+  resume_pdf: media/Danny_Rollo_Resume.pdf
+
+research_interests: >-
+  Deep learning for medical imaging and healthcare; efficient architectures for
+  low-data regimes; representation learning and recommender systems; imitation
+  learning for robotic manipulation; agentic LLM systems.
+
+# ════════════════════════════════════════════════════════════════════════════
+#  METRICS — each number lives exactly once.
+# ════════════════════════════════════════════════════════════════════════════
+metrics:
+  nucleus:
+    params: 34M
+    param_ratio: ~24×
+    dice_pannuke: "0.851"
+    dice_monuseg: "0.796"
+    swin_gap: "4.9"
+    memory_ratio: 2.6×
+    latency_ratio: 1.8×
+    pannuke_patches: 5K
+    pannuke_tissues: "19"
+    monuseg_wsis: "37"
+  twotower:
+    reviews: 1.3M
+    experiments: "12"
+    cold_user_gain: "4.2"
+    ndcg_context_only: 29.0%
+    ndcg_full: 24.8%
+    ndcg_no_prefs: 28.9%
+    pop_baseline_gap: 27.2 pp
+    ndcg_cold_rest: 9.3%
+    ndcg_cold_rest_dropped: 3.6%
+    checkin_warm_lift: 1.7 pp
+    checkin_cold_lift: 1.9 pp
+    build_before: 47s
+    build_after: 8s
+    team: "4"
+  railmax:
+    r2: "0.76"
+    rmse: "0.84"
+    stations: ~500
+    folds: "5"
+    feature_categories: "6"
+    top_pairs: "20"
+  flow:
+    demos_baseline: "100"
+    demos_multi: "400"
+    chunk: "8"
+    objects: "3"
+    d_act_from: "4"
+    d_act_to: "32"
+    team: "3"
+  embeddings:
+    model: all-mpnet-base-v2
+    dims: 768
+  linevision:
+    speedup: 1000×
+  generate:
+    team: "14"
+    team_remo: "8"
+  translation:
+    accuracy: 81%
+  lls:
+    raised: $58,000
+    weeks: seven
+  eagle:
+    volunteers: "30"
+    benches: six
+  teaching:
+    students: 40+
+
+# ════════════════════════════════════════════════════════════════════════════
+#  EDUCATION
+# ════════════════════════════════════════════════════════════════════════════
+education:
+  - institution: Northeastern University
+    location: Boston, MA
+    degree: M.S. in Computer Science
+    degree_short: M.S. Computer Science
+    date: Sept 2024 – Expected May 2026
+    date_short: May 2026
+    coursework_label: Graduate coursework
+    coursework: >-
+      Applied Deep Learning, Deep Learning, Machine Learning, Algorithms,
+      Empirical Research Methods, Web Development, Computer Graphics
+  - institution: Northeastern University
+    location: Boston, MA
+    degree: B.S. in Computer Science & Mathematics
+    degree_short: B.S. Computer Science & Mathematics
+    date: Sept 2021 – May 2025
+    date_short: May 2025
+    coursework_label: Undergraduate coursework
+    coursework: >-
+      AI4Impact, Matrix Methods in Machine Learning & Data Analysis, Systems
+      Security, Object-Oriented Design, Statistics & Stochastic Processes
+
+# ════════════════════════════════════════════════════════════════════════════
+#  PUBLICATIONS
+# ════════════════════════════════════════════════════════════════════════════
+publications:
+  - id: nucleus
+    title: Lightweight CNN Encoders for Nucleus Segmentation
+    authors: "**D. Rollo**"
+    authors_cv: "**Rollo, D.**"
+    venue: >-
+      International Conference on Medical Image Computing and
+      Computer-Assisted Intervention (MICCAI)
+    venue_short: MICCAI 2026
+    year: 2026
+    status: Accepted · Poster
+    status_cv: Accepted --- poster.
+    peer_reviewed: true
+    site_anchor: "#nucleus-segmentation"
+    summary: >-
+      A controlled encoder ablation showing a {{ m.nucleus.params }}-parameter
+      VGG U-Net matches MedT — a transformer purpose-built for small medical
+      datasets — at a {{ m.nucleus.param_ratio }} smaller parameter budget, and
+      outperforms pretrained Swin-T by {{ m.nucleus.swin_gap }} Dice points
+      with {{ m.nucleus.memory_ratio }} less memory and
+      {{ m.nucleus.latency_ratio }} lower inference latency.
+    links:
+      - {label: Paper (PDF), href: "media/final_report.pdf", external: true}
+      - {label: Code, href: "https://github.com/Bedrockdude10/BinaryCellSegmentation", external: true}
+
+  - id: twotower
+    title: Two-Tower Recommendation with Cold Start Ablation
+    authors: "**D. Rollo**, et al."
+    authors_cv: "**Rollo, D.**, et al."
+    venue: Manuscript in preparation
+    venue_short: In Preparation
+    year: null
+    status: null
+    peer_reviewed: false
+    summary: >-
+      A {{ m.twotower.experiments }}-experiment ablation on a dual-encoder
+      retrieval model over {{ m.twotower.reviews }} Yelp reviews, with a
+      leave-one-out onboarding protocol that prevents test-set leakage on cold
+      users.
+    links:
+      - {label: Code, href: "https://github.com/Bedrockdude10/cs7180-platemate", external: true}
+
+# ════════════════════════════════════════════════════════════════════════════
+#  PROJECTS
+#
+#  `site_order` controls the website; `cv_rank` controls the CV's Research
+#  Experience section (omit to keep a project off the CV entirely).
+#  `resume: true` promotes it into the 1-page resume.
+# ════════════════════════════════════════════════════════════════════════════
+projects:
+  - id: twotower
+    site_order: 1
+    cv_rank: 2
+    resume: true
+    title: Two-Tower Recommendation with Cold Start Ablation
+    tag: Research · Recommender Systems
+    tag_class: type-research
+    dates: 2025
+    role_cv: Primary contributor & project lead · team of {{ m.twotower.team }}
+    stack_cv: PyTorch, BPR loss, Yelp Open Dataset
+    subtitle: >-
+      Found that context features alone outperform the full model on cold-start
+      users by {{ m.twotower.cold_user_gain }} NDCG@10 points, while content
+      features remain essential for cold restaurants. A
+      {{ m.twotower.experiments }}-experiment ablation on a Two-Tower dual
+      encoder over {{ m.twotower.reviews }} Yelp reviews.
+    tech: [PyTorch, Two-Tower, BPR Loss, Cold Start, Yelp Dataset, Ablation Study,
+           NDCG / Hit@K, Gumbel-max Sampling]
+    detail_groups:
+      - heading: Key Findings
+        items:
+          - >-
+            **Cold users:** context-only model (day-of-week, distance,
+            restaurant temporal profiles) achieves NDCG@10 of
+            {{ m.twotower.ndcg_context_only }} — beats the full model's
+            {{ m.twotower.ndcg_full }} and the popularity baseline by
+            {{ m.twotower.pop_baseline_gap }}
+          - >-
+            **Cold restaurants:** content features are essential — dropping
+            user preferences collapses NDCG@10 from
+            {{ m.twotower.ndcg_cold_rest }} →
+            {{ m.twotower.ndcg_cold_rest_dropped }}; popularity scores 0% by
+            design (no training reviews)
+          - >-
+            **Asymmetric feature importance:** dropping user preferences
+            *improves* cold user performance ({{ m.twotower.ndcg_full }} →
+            {{ m.twotower.ndcg_no_prefs }}) but cuts cold restaurant
+            performance in half — sparse preference estimates are noisier than
+            situational context
+          - >-
+            **Checkin-matched visit times** (UTC → local via per-state IANA
+            timezone mapping) lift warm NDCG@10 by
+            {{ m.twotower.checkin_warm_lift }} and cold user by
+            {{ m.twotower.checkin_cold_lift }}
+          - >-
+            **Gated fusion underperforms on cold restaurants:** content-gated
+            interactions learned on training restaurants don't transfer to
+            unseen ones
+      - heading: Engineering Highlights
+        items:
+          - >-
+            On-device feature indexing (no DataLoader, no CPU↔GPU transfer per
+            batch); per-epoch resampling of geographic negatives and Gumbel-max
+            onboarding selections as free data augmentation
+          - >-
+            Leave-one-out onboarding evaluation prevents information leakage
+            when cold users' only signal comes from test reviews
+          - >-
+            4-stage data pipeline (extract → preprocess → split → feature prep)
+            with iterative interaction-density filtering and stratified cold
+            start holdout
+          - >-
+            Vectorized dataset construction dropped from
+            {{ m.twotower.build_before }} to {{ m.twotower.build_after }} via
+            numpy bulk operations
+    media:
+      - type: figure
+        src: media/platemate_ablation.png
+        alt: >-
+          Ablation results across warm, cold restaurant, and cold user splits
+          showing how feature combinations affect each cold start scenario.
+        caption: >-
+          Ablation results across three test splits. Context features dominate
+          cold users; content features dominate cold restaurants.
+    meta: >-
+      Team of {{ m.twotower.team }} · Primary contributor & project lead —
+      contributed across both towers, pipeline architecture, checkin temporal
+      profiles, and geographic negative sampling
+    links:
+      - {label: Paper (coming soon), href: "#", disabled: true, title: Paper draft in progress}
+      - {label: GitHub, href: "https://github.com/Bedrockdude10/cs7180-platemate", external: true}
+    cv_bullets:
+      - >-
+        Found context features alone (day-of-week, distance, restaurant
+        temporal profiles) outperform the full model on cold-start users by
+        {{ m.twotower.cold_user_gain }} NDCG@10 points, while content features
+        remain essential for cold restaurants — an asymmetry in feature
+        importance across cold-start regimes.
+      - >-
+        Designed a leave-one-out onboarding evaluation that prevents
+        information leakage when a cold user's only signal comes from held-out
+        reviews.
+      - >-
+        Built a 4-stage data pipeline (extract, preprocess, split, feature
+        prep) with iterative interaction-density filtering and stratified
+        cold-start holdout; reduced dataset construction from
+        {{ m.twotower.build_before }} to {{ m.twotower.build_after }} via
+        vectorization.
+      - >-
+        Implemented on-device feature indexing eliminating per-batch CPU–GPU
+        transfer, with per-epoch resampling of geographic negatives and
+        Gumbel-max onboarding selections as data augmentation.
+
+  - id: nucleus
+    site_order: 2
+    cv_rank: 1
+    resume: true
+    site_id: nucleus-segmentation
+    title: Lightweight CNN Encoders for Nucleus Segmentation
+    tag: MICCAI 2026 · Poster
+    tag_class: type-accepted
+    dates: 2025–2026
+    role_cv: Sole author · Northeastern University
+    stack_cv: PyTorch, timm, PanNuke, MoNuSeg
+    subtitle: >-
+      Controlled encoder ablation showing a {{ m.nucleus.params }}-param VGG
+      U-Net matches MedT (a transformer purpose-built for small medical
+      datasets) and outperforms pretrained Swin-T on nucleus segmentation in
+      the low-data regime.
+    tech: [PyTorch, U-Net, Swin Transformer, ResNet, VGG, Medical Imaging,
+           PanNuke / MoNuSeg, timm]
+    detail_groups:
+      - heading: Key Findings
+        items:
+          - >-
+            VGG U-Net (Dice {{ m.nucleus.dice_pannuke }}) matches ResNet and
+            beats pretrained Swin-T by {{ m.nucleus.swin_gap }} Dice points on
+            PanNuke ({{ m.nucleus.pannuke_patches }} patches,
+            {{ m.nucleus.pannuke_tissues }} tissue types)
+          - >-
+            On MoNuSeg ({{ m.nucleus.monuseg_wsis }} training WSIs), VGG reaches
+            Dice {{ m.nucleus.dice_monuseg }} — equivalent to MedT's published
+            number with a {{ m.nucleus.param_ratio }} larger param budget but no
+            specialized attention mechanism
+          - >-
+            Pareto-dominant on inference cost: {{ m.nucleus.memory_ratio }} less
+            memory and {{ m.nucleus.latency_ratio }} lower latency than Swin-T
+            at equal-or-better accuracy
+          - >-
+            Hypothesized mechanism: spatial-resolution preservation at skip
+            connections + convolutional inductive bias outweighs Swin's
+            pretraining advantage in low-data regime
+          - >-
+            Implications for edge-deployed microscopy, veterinary/rare-disease
+            research, and non-H&E staining where foundation model pretraining
+            misaligns
+    media:
+      - type: figure
+        src: media/monuseg_comparison.png
+        alt: >-
+          Qualitative comparison on MoNuSeg test images: input H&E patch, ground
+          truth (green), VGG prediction, and Swin prediction with per-image Dice
+          scores.
+        caption: >-
+          Qualitative comparison on MoNuSeg test images. VGG produces tighter
+          boundary delineation; Swin over-segments dense regions and misses
+          isolated nuclei in sparse ones.
+      - type: figure
+        src: media/training_curves.png
+        alt: >-
+          Training and validation Dice score curves across encoder architectures
+          (VGG, ResNet, Swin-T) over training epochs on PanNuke and MoNuSeg.
+        caption: >-
+          Training curves across encoder architectures. VGG converges smoothly;
+          Swin-T shows higher variance and slower convergence in the low-data
+          regime.
+    links:
+      - {label: Paper (PDF), href: "media/final_report.pdf", external: true}
+      - {label: GitHub, href: "https://github.com/Bedrockdude10/BinaryCellSegmentation", external: true}
+    cv_bullets:
+      - >-
+        Designed and ran a controlled encoder ablation isolating encoder choice
+        in U-Net segmentation, holding decoder, augmentation, and optimization
+        schedule fixed across VGG, ResNet, and Swin-T backbones.
+      - >-
+        Established that a {{ m.nucleus.params }}-parameter VGG U-Net (Dice
+        {{ m.nucleus.dice_pannuke }} on PanNuke;
+        {{ m.nucleus.dice_monuseg }} on MoNuSeg) matches a purpose-built
+        medical transformer and is Pareto-dominant on inference cost.
+      - >-
+        Attributed the result to spatial-resolution preservation at skip
+        connections and convolutional inductive bias outweighing Swin's
+        pretraining advantage in the low-data regime.
+      - >-
+        Authored the full manuscript, produced all quantitative and qualitative
+        figures, and wrote the discussion.
+
+  - id: flow
+    site_order: 3
+    cv_rank: 3
+    title: Flow Matching for Robotic Manipulation
+    tag: Research · Robotics
+    tag_class: type-dl
+    dates: 2025
+    role_cv: Team of {{ m.flow.team }} · Northeastern University
+    stack_cv: PyTorch, MuJoCo, MetaWorld
+    subtitle: >-
+      Imitation learning via continuous-time flow matching on MuJoCo/MetaWorld
+      bin-picking — a neural vector field transports Gaussian noise to expert
+      action distributions via ODE integration. Scales from a proprioceptive
+      single-object baseline to RGBD+language-conditioned action chunking across
+      {{ m.flow.objects }}-object scenes.
+    tech: [PyTorch, Flow Matching, MuJoCo, MetaWorld, Imitation Learning,
+           Action Chunking, CNN (RGBD), RK2 ODE Solver]
+    detail_groups:
+      - heading: Approach & Findings
+        items:
+          - >-
+            **Flow matching policy:** vector field maps (observation, noisy
+            action, flow time τ) → velocity; RK2 integrates from τ=0→1 at
+            inference to produce clean action samples without diffusion's
+            iterative denoising cost
+          - >-
+            **Baseline (expt_1):** proprioception-only MLP trained on
+            {{ m.flow.demos_baseline }} scripted demos achieves reliable
+            single-object bin-picking — validates the flow matching objective on
+            a tractable case (see demo)
+          - >-
+            **Multi-modal scaling (expt_4):** RGBD CNN encoder + per-object text
+            embedding extends the policy to {{ m.flow.objects }}-object scenes;
+            {{ m.flow.demos_multi }} demos required to cover combinatorial
+            object arrangements
+          - >-
+            **Action chunking (expt_6):** predicts {{ m.flow.chunk }}
+            consecutive actions (d_act {{ m.flow.d_act_from }}→{{ m.flow.d_act_to }})
+            to improve temporal coherence; compounding error on the harder
+            {{ m.flow.objects }}-object task highlights open generalization
+            challenges
+    media:
+      - type: video_pair
+        videos:
+          - src: media/expt_1_demo.webm
+            caption: >-
+              Baseline (expt_1): proprioception-only policy completes
+              single-object bin-picking from {{ m.flow.demos_baseline }}
+              scripted demos.
+          - src: media/action_chunking_demo.mp4
+            caption: >-
+              Action chunking (expt_6): {{ m.flow.chunk }}-step prediction on
+              the harder {{ m.flow.objects }}-object task — temporal coherence
+              improves over single-step, but {{ m.flow.objects }}-object
+              generalization is an open problem.
+    meta: Team of {{ m.flow.team }}
+    links:
+      - {label: GitHub, href: "https://github.com/Bedrockdude10/cs7180-final-project", external: true}
+    cv_bullets:
+      - >-
+        Implemented continuous-time flow matching for imitation learning: a
+        neural vector field transports Gaussian noise to expert action
+        distributions via RK2 ODE integration, avoiding the iterative denoising
+        cost of diffusion policies.
+      - >-
+        Scaled from a proprioception-only baseline on single-object bin-picking
+        to an RGBD- and language-conditioned policy with {{ m.flow.chunk }}-step
+        action chunking across {{ m.flow.objects }}-object scenes; characterized
+        compounding-error limits on multi-object generalization.
+
+  - id: railmax
+    site_order: 4
+    cv_rank: 4
+    resume: true
+    title: RailMax
+    title_cv: "RailMax: Amtrak Service Optimizer"
+    tag: Machine Learning · Public Transit
+    tag_class: type-ml
+    dates: 2025
+    role_cv: Open-source modeling study
+    stack_cv: InterpretML, GTFS, Census ACS, Folium
+    subtitle: >-
+      Interpretable ML model (EBM) predicting annual ridership at
+      {{ m.railmax.stations }} US Amtrak stations and surfacing where increased
+      service would have the greatest impact — with an interactive map for
+      exploring underservice ratios and running what-if frequency scenarios.
+    tech: [Python, EBM (InterpretML), Gradient Boosting, GTFS, US Census ACS,
+           Folium, Stratified Group CV, Streamlit]
+    detail_groups:
+      - heading: Key Findings
+        items:
+          - >-
+            EBM achieves R² = {{ m.railmax.r2 }} / RMSE {{ m.railmax.rmse }}
+            (log scale) via {{ m.railmax.folds }}-fold stratified group
+            cross-validation, with stations clustered geographically to prevent
+            leakage between nearby stops
+          - >-
+            Interactive map colors every Amtrak station by demand ratio (actual
+            ÷ predicted ridership) and lets users adjust weekly departures to
+            estimate ridership impact
+          - >-
+            Features span {{ m.railmax.feature_categories }} categories:
+            geography, intermodal connectivity, service frequency, demographics
+            (ACS), land use (colleges, tourism), and station type
+          - >-
+            Identified top-{{ m.railmax.top_pairs }} city pairs most likely to
+            benefit from increased service frequency
+          - >-
+            Major hubs (NYC Penn, Chicago Union) systematically underpredicted —
+            documented as a known limitation of additive cross-sectional
+            modeling at convergence points
+    media:
+      - type: embed
+        src: https://bedrockdude10.github.io/RailMax/results/underservice_map.html
+        title: RailMax Interactive Underservice Map
+    links:
+      - {label: GitHub, href: "https://github.com/Bedrockdude10/RailMax", external: true}
+      - {label: Interactive Map, href: "https://bedrockdude10.github.io/RailMax/results/underservice_map.html", external: true}
+    cv_bullets:
+      - >-
+        Modeled the US Amtrak network as a directed weighted graph and
+        engineered node-level features including destination-population-weighted
+        reachability and eigenvector centrality.
+      - >-
+        Trained an Explainable Boosting Machine (R² = {{ m.railmax.r2 }}, RMSE
+        {{ m.railmax.rmse }} log scale) under {{ m.railmax.folds }}-fold
+        stratified group cross-validation with k-means geographic clustering to
+        prevent spatial leakage.
+      - >-
+        Integrated Census ACS, GTFS, NTAD, and IPEDS sources; deployed an
+        interactive what-if frequency simulator identifying the
+        top-{{ m.railmax.top_pairs }} city pairs most likely to benefit from
+        added service.
+
+  - id: booker
+    site_order: 5
+    title: Booker
+    tag: Agentic AI
+    tag_class: type-agentic
+    subtitle: >-
+      Multi-agent system for autonomous artist–venue matching with
+      production-grade orchestration, semantic vector search, memory management,
+      and safety guardrails.
+    tech: [Python, Claude API, Go Backend, MongoDB Atlas Vector Search,
+           Sentence Transformers, MCP Server, NeMo Guardrails, OpenTelemetry,
+           Streamlit]
+    detail_groups:
+      - heading: Key Design Decisions
+        items:
+          - Coordinator pattern with bounded iterations prevents runaway agent loops
+          - >-
+            MongoDB Atlas Vector Search with `{{ m.embeddings.model }}`
+            embeddings ({{ m.embeddings.dims }}-dim) for semantic artist/venue
+            discovery by vibe and description
+          - >-
+            3-tier memory (conversation, working, preferences) enables
+            context-aware multi-turn interactions
+          - >-
+            NeMo Guardrails enforce content safety and domain boundaries at
+            inference time
+          - >-
+            Structured tool use with Claude API for reliable, typed
+            agent-to-tool communication
+          - MCP server for Claude Desktop integration with standardized tool interop
+    media:
+      # Hand-authored one-off markup — kept verbatim rather than modelled.
+      - type: raw
+        html: |
+          <div class="arch-diagram"><span class="node">User Query</span>
+              <span class="arrow">│</span>
+              <span class="arrow">▼</span>
+          <span class="node">Coordinator Agent</span> <span class="label">← routes to specialist based on intent</span>
+              <span class="arrow">├──▶</span> <span class="node">Artist Agent</span>      <span class="label">← genre matching, availability</span>
+              <span class="arrow">├──▶</span> <span class="node">Venue Agent</span>       <span class="label">← capacity, location, pricing</span>
+              <span class="arrow">└──▶</span> <span class="node">Booking Advisor</span>  <span class="label">← synthesizes recommendations</span>
+              <span class="arrow">│</span>
+              <span class="arrow">▼</span>
+          <span class="node">3-Tier Memory</span>: conversation │ working │ preferences
+          <span class="node">MCP Server</span>: standardized tool interop
+          <span class="node">NeMo Guardrails</span>: safety + compliance layer
+          <span class="node">OpenTelemetry</span>: observability + tracing</div>
+        position: before_details
+      - type: embed
+        src: https://booker-hjbdoiu5fobsifeuwwnpsg.streamlit.app/?embedded=true
+        title: Booker Live Demo
+    links:
+      - {label: GitHub, href: "https://github.com/Bedrockdude10/Booker/tree/main/agent-demo", external: true}
+      - {label: Live Demo, href: "https://booker-hjbdoiu5fobsifeuwwnpsg.streamlit.app/", external: true}
+
+  - id: translation
+    site_order: 6
+    title: Attention-Based Machine Translation
+    tag: Deep Learning
+    tag_class: type-dl
+    subtitle: >-
+      Seq2seq encoder-decoder with Bahdanau and multi-head attention for
+      Spanish→English translation, built from scratch in PyTorch.
+    tech: [PyTorch, Bahdanau Attention, Multi-Head Attention, Encoder-Decoder,
+           BLEU Scoring]
+    detail_groups:
+      - heading: Architecture & Results
+        items:
+          - >-
+            Implemented Bahdanau (additive) and multi-head attention mechanisms
+            from first principles
+          - >-
+            Encoder: bidirectional GRU producing context vectors; Decoder: GRU
+            with attention over encoder outputs
+          - >-
+            Achieved {{ m.translation.accuracy }} accuracy on Spanish→English
+            translation benchmark
+          - Built attention heatmap visualizations showing learned alignment patterns
+          - Compared additive vs. scaled dot-product attention tradeoffs empirically
+    links:
+      - {label: GitHub, href: "https://github.com/bedrockdude10/attention-translation", external: true}
+
+  - id: platemate
+    site_order: 7
+    title: PlateMate
+    tag: Startup · ML Product
+    tag_class: type-product
+    subtitle: >-
+      AI-powered food recommendation platform using collaborative filtering,
+      RAG-based semantic search, and vector similarity over restaurant reviews.
+    tech: [Python, MongoDB Atlas Vector Search, Sentence Transformers,
+           Collaborative Filtering, RAG Pipeline, AWS S3, React]
+    detail_groups:
+      - heading: Technical Highlights
+        items:
+          - >-
+            Hybrid recommendation engine: item-based collaborative filtering +
+            semantic vector search
+          - >-
+            RAG pipeline with `{{ m.embeddings.model }}` embeddings
+            ({{ m.embeddings.dims }}-dim) for natural language dish queries
+          - Query parsing into semantic + structured filters with geo-aware retrieval
+          - User-item interaction matrix for personalized collaborative filtering scores
+          - CTO — leading architecture decisions, ML pipeline design, and team of engineers
+    links:
+      - {label: GitHub, href: "https://github.com/PlateMate-App", external: true}
+
+  - id: cancer
+    site_order: 8
+    title: Cancer Cell Classification
+    tag: Machine Learning
+    tag_class: type-ml
+    subtitle: >-
+      Multi-method classification pipeline for identifying cancer cells in gene
+      expression data, comparing PCA, SVM, Random Forest, and neural approaches.
+    tech: [Python, Scikit-learn, PCA, SVM, Random Forest, Pandas]
+    detail_groups:
+      - heading: Approach
+        items:
+          - Dimensionality reduction via PCA on high-dimensional gene expression features
+          - >-
+            Compared SVM, Random Forest, and logistic regression on
+            cancer/non-cancer classification
+          - Evaluated precision-recall tradeoffs critical for medical classification tasks
+          - Completed for Matrix Methods in Machine Learning & Data Analysis
+    links:
+      - {label: GitHub, href: "https://github.com/Bedrockdude10/Cancer-Classification-Project", external: true}
+
+# ════════════════════════════════════════════════════════════════════════════
+#  PROFESSIONAL EXPERIENCE
+# ════════════════════════════════════════════════════════════════════════════
+experience:
+  - org: Teradata
+    site_order: 1
+    resume: true
+    title: AI/ML Product Management Analytics Intern
+    title_short: AI/ML Product Management Intern
+    location: San Diego, CA (Remote)
+    date: June 2025 – May 2026
+    date_short: 2025–2026
+    site_summary: >-
+      Delivered business case for AI Code Assistant product. Defined
+      requirements with cross-functional stakeholders and oversaw multiple
+      product iterations on agentic AI development tools.
+    bullets:
+      - >-
+        Authored the business case and led the design of a context-aware AI
+        Notebook Assistant for VantageCloud AI Studio, enabling intelligent code
+        generation, contextual suggestions, and integration with company
+        libraries and documentation.
+      - >-
+        Built frontend prototypes and interaction specs for agentic notebook
+        assistant features, translating LLM capability constraints into
+        user-facing product decisions.
+
+  - org: PlateMate
+    site_order: 3
+    resume: true
+    title: Co-Founder & Chief Technology Officer
+    title_short: Co-Founder & CTO
+    location: Boston, MA
+    date: May 2025 – Present
+    date_short: 2025–Present
+    site_summary: >-
+      Leading ML architecture and engineering for AI-powered food recommendation
+      platform. Collaborative filtering, RAG search, vector similarity.
+    bullets:
+      - >-
+        Lead ML architecture and engineering for a food recommendation platform:
+        hybrid item-based collaborative filtering plus semantic vector search
+        over restaurant reviews.
+      - >-
+        Built a RAG retrieval pipeline with {{ m.embeddings.dims }}-dimensional
+        `{{ m.embeddings.model }}` embeddings on MongoDB Atlas Vector Search,
+        parsing natural-language dish queries into semantic and structured
+        geo-aware filters.
+
+  - org: LineVision
+    org_cv: LineVision Inc.
+    site_order: 2
+    resume: true
+    title: Software Engineer Co-op
+    location: Boston, MA
+    date: Jan 2024 – June 2024
+    date_short: 2024
+    site_summary: >-
+      Owned internal web app, expanded APIs and database schema, improved data
+      pipeline performance by {{ m.linevision.speedup }} for staff scientists.
+    bullets:
+      - >-
+        Full-stack owner of an internal web application; defined features with
+        stakeholders, expanded APIs and database schema, maintained the
+        application end to end.
+      - >-
+        Re-architected a data pipeline for staff scientists, achieving a
+        {{ m.linevision.speedup }} speed improvement.
+
+  - org: Breckinridge Capital Advisors
+    title: Infrastructure Intern
+    location: Boston, MA
+    date: July 2023 – Sept 2023
+    bullets:
+      - >-
+        Cleaned datasets, built Python web scrapers, and trained a clustering
+        model on the resulting data.
+      - >-
+        Performed Windows and Linux system administration and security work
+        using PowerShell, Darktrace, and Bit9; built front-ends in React.js and
+        Razor Pages.
+
+  # Three successive roles at Generate, listed as a progression.
+  - org: Generate Product Development
+    title: Project Lead, Technical Lead, Software Engineer
+    location: Boston, MA
+    date: Jan 2023 – May 2025
+    resume: true
+    roles:
+      - title: Project Lead
+        date: Dec 2024 – May 2025
+        bullets:
+          - >-
+            Led {{ m.generate.team }} engineers and designers to deliver a
+            production mobile application; defined requirements with external
+            stakeholders.
+      - title: Technical Lead
+        date: Sept 2023 – Dec 2023
+        bullets:
+          - >-
+            Led a team of developers building an iOS/Android app on a React
+            Native frontend with a Go/Postgres backend.
+      - title: Software Engineer
+        date: Jan 2023 – May 2024
+        bullets:
+          - >-
+            Backend developer on a team of {{ m.generate.team_remo }} building
+            ReMo, a literacy tool for educators; designed the database and
+            internal model and implemented the networking API in Go.
+
+# ════════════════════════════════════════════════════════════════════════════
+#  TEACHING
+# ════════════════════════════════════════════════════════════════════════════
+teaching:
+  - org: Khoury College of Computer Sciences
+    org_short: Northeastern University
+    title: Lead Teaching Assistant
+    title_short: Lead Lab TA
+    course: Fundamentals of Computer Science I & II
+    course_short: Fundamentals of Computer Science 1 & 2
+    location: Boston, MA
+    date: 2022 – 2025
+    date_short: 2022–2025
+    site_order: 4
+    resume: true
+    site_summary: >-
+      Led weekly labs for {{ m.teaching.students }} students in Fundamentals of
+      Computer Science 1 & 2. Conducted office hours and graded assignments.
+    bullets:
+      - >-
+        Led weekly two-hour laboratory sections of {{ m.teaching.students }}
+        students across six semesters, held 1-on-1 office hours, and graded
+        assignments.
+      - >-
+        Taught recursion, linked lists, and functional programming (Fundamentals
+        I), then Java object-oriented design, polymorphism, data structures,
+        algorithm design, and time complexity (Fundamentals II).
+
+# ════════════════════════════════════════════════════════════════════════════
+#  HONORS
+# ════════════════════════════════════════════════════════════════════════════
+honors:
+  - title: Rookie of the Year, HackBeanpot
+    date: February 2023
+    resume: true
+    note: Built a food-desert tracking web application on a six-person team.
+  - title: Students of the Year Runner-Up, Leukemia & Lymphoma Society
+    title_short: Students of the Year Runner-Up, LLS
+    date: March 2021
+    resume: true
+    note: >-
+      Raised {{ m.lls.raised }} for blood cancer research in {{ m.lls.weeks }}
+      weeks during the height of the COVID-19 pandemic.
+  - title: Eagle Scout, Scouts BSA
+    date: October 2019
+    resume: true
+    note: >-
+      Led {{ m.eagle.volunteers }} volunteers to design, fundraise, and
+      construct {{ m.eagle.benches }} portable benches for a local school,
+      delivered on schedule despite pandemic restrictions and supply shortages.
+
+# ════════════════════════════════════════════════════════════════════════════
+#  SKILLS
+# ════════════════════════════════════════════════════════════════════════════
+# Each skill is named once. `resume_max` caps how many appear on the 1-page
+# resume (most important first); the CV always shows the full list.
+skills:
+  - label: Languages
+    resume: true
+    items: [Python, Go, TypeScript/JavaScript, SQL]
+  - label: Deep Learning
+    resume: true
+    resume_max: 6
+    items: [PyTorch, timm, CNNs, U-Net, Vision Transformers (Swin),
+            Transformers & attention, flow matching, diffusion policies,
+            imitation learning]
+  - label: Machine Learning
+    resume: true
+    resume_max: 6
+    items: [scikit-learn, InterpretML (EBM), gradient boosting, PCA, SVM,
+            collaborative filtering, two-tower retrieval, ablation design,
+            cross-validation methodology]
+  - label: LLM & Agentic Systems
+    resume: true
+    resume_max: 6
+    items: [Claude and OpenAI APIs, MCP servers, multi-agent orchestration, RAG,
+            SentenceTransformers, vector search, NeMo Guardrails, OpenTelemetry]
+  - label: Infrastructure
+    resume: true
+    resume_max: 5
+    items: [Docker, AWS (S3), FastAPI, MongoDB Atlas, SLURM / HPC clusters, Git]
+  - label: Data & Visualization
+    items: [pandas, NumPy, Folium, Streamlit, GTFS, Census ACS]
+
+languages: Latin (limited working); English (native).
+
+activities: >-
+  Generate Product Development (Northeastern student-run product studio);
+  captain, Northeastern FC (BSSL) and intramural soccer; guitarist and
+  songwriter, Northeastern Jazz Combo and Music Farm.

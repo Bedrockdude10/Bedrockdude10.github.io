@@ -1,0 +1,85 @@
+<# One-page industry resume: a filtered view of the same data as the CV.
+   Controlled by `resume: true` flags in data/cv.yml. Bullets are truncated
+   to keep this to a single page. #>
+<% set fontsize = '10pt' %>
+<% set margin = '0.45in' %>
+<% set section_before = '0.55em' %>
+<% set section_after = '0.3em' %>
+<% set show_footer = false %>
+<% set doc_name = 'Resume' %>
+<% include '_preamble.tex.j2' %>
+
+% Tighter than the CV so this stays on one page.
+\setlist[itemize]{leftmargin=1.1em,itemsep=0pt,topsep=0pt,parsep=0pt}
+\linespread{0.93}
+\setlength{\parskip}{0pt}
+
+\begin{document}
+\small
+
+<% include '_header.tex.j2' %>
+
+% ══════════════ EDUCATION ══════════════
+\section{Education}
+\entry{<< education[0].institution | tex >>}{<< education[0].location | tex >>}
+<% for ed in education %>
+\subentry{<< ed.degree | tex >>}{<< ed.date | tex >>}
+<% endfor %>
+<# Coursework is omitted here; the CV carries it. #>
+
+% ══════════════ PUBLICATIONS ══════════════
+<# One line per paper — the CV carries the full abstract-style summary. #>
+\section{Publications}
+<% for pub in pubs_reviewed %>
+\noindent{}<< pub.authors_cv | md >> ``<< pub.title | tex >>.'' \textit{<< pub.venue_short | tex >>}.<% if pub.status_cv %> \textbf{<< pub.status_cv | tex >>}<% endif %>\par
+<% endfor %>
+
+% ══════════════ SKILLS ══════════════
+\section{Technical Skills}
+\begin{itemize}[leftmargin=0em,label={}]
+<% for s in resume_skills %>
+    \item \textbf{<< s.label | tex >>:} << s['items'][:s.resume_max] | join(', ') | md >>
+<% endfor %>
+\end{itemize}
+
+% ══════════════ PROJECTS ══════════════
+\section{Selected Projects}
+<% for p in resume_projects %>
+\entry{<< (p.title_cv | default(p.title, true)) | tex >>}{<< p.stack_cv | tex >>}
+\begin{itemize}
+<% for b in p.cv_bullets[:2] %>
+    \item << b | md >>
+<% endfor %>
+\end{itemize}
+<% if not loop.last %>
+\vspace{0.25em}
+<% endif %>
+<% endfor %>
+
+% ══════════════ EXPERIENCE ══════════════
+\section{Experience}
+<% for e in resume_experience %>
+\entry{<< (e.org_cv | default(e.org, true)) | tex >> --- << e.title | tex >>}{<< e.date | tex >>}
+\begin{itemize}
+<% for b in (e.roles[0].bullets if e.roles else e.bullets)[:2] %>
+    \item << b | md >>
+<% endfor %>
+\end{itemize}
+<% if not loop.last %>
+\vspace{0.25em}
+<% endif %>
+<% endfor %>
+
+<# Teaching collapses to one line here; the CV gives it its own section. #>
+<% for t in teaching if t.resume %>
+\vspace{0.25em}
+\entry{<< t.org | tex >> --- << t.title | tex >>}{<< t.date | tex >>}
+\noindent{}<< t.course | tex >> \textperiodcentered{} << t.bullets[0] | md >>\par
+<% endfor %>
+
+% ══════════════ HONORS ══════════════
+<# Inline rather than a list — the CV carries the full descriptions. #>
+\section{Honors \& Awards}
+\noindent{}<% for h in resume_honors %>\textbf{<< (h.title_short | default(h.title, true)) | tex >>}<% if not loop.last %> \textperiodcentered{} <% endif %><% endfor %>\par
+
+\end{document}
