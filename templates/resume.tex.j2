@@ -25,7 +25,10 @@
 <% for ed in education %>
 \subentry{<< ed.degree | tex >>}{<< ed.date | tex >>}
 <% endfor %>
-<# Coursework is omitted here; the CV carries it. #>
+<% if variant == 'research' %>
+\vspace{0.1em}
+\noindent{}{\small \textit{Relevant coursework:} << quantitative_coursework | tex >>}\par
+<% endif %>
 
 % ══════════════ PUBLICATIONS ══════════════
 <# One line per paper — the CV carries the full abstract-style summary. #>
@@ -37,17 +40,17 @@
 % ══════════════ SKILLS ══════════════
 \section{Technical Skills}
 \begin{itemize}[leftmargin=0em,label={}]
-<% for s in resume_skills %>
-    \item \textbf{<< s.label | tex >>:} << s['items'][:s.resume_max] | join(', ') | md >>
+<% for s in r_skills %>
+    \item \textbf{<< s.label | tex >>:} << s['items'][:(s.research_max if variant == 'research' else s.resume_max)] | join(', ') | md >>
 <% endfor %>
 \end{itemize}
 
 % ══════════════ PROJECTS ══════════════
 \section{Selected Projects}
-<% for p in resume_projects %>
+<% for p in r_projects %>
 \entry{<< (p.title_cv | default(p.title, true)) | tex >>}{<< p.stack_cv | tex >>}
 \begin{itemize}
-<% for b in p.cv_bullets[:2] %>
+<% for b in p.pick_bullets[:2] %>
     \item << b | md >>
 <% endfor %>
 \end{itemize}

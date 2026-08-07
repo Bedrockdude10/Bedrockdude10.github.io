@@ -17,16 +17,16 @@
 identity:
   name: Danny Rollo
   role: Machine Learning Researcher
-  site_title: Danny Rollo — ML Engineer
   # Hero headline is split so the second half can take the gradient treatment.
   headline: Danny Rollo
   headline_accent: builds intelligent systems.
   hero_bio: >-
-    MS Computer Science @ Northeastern (May 2026). I build deep learning models
+    MS Computer Science @ Northeastern (April 2026). I build deep learning models
     and ML systems — motivated by the belief that the best ML work makes the
     world a better place.
-  availability: Available June 2026 · NYC Metro
-  location_cv: Boston, MA · NYC Metro (from June 2026)
+  availability: Available now · NYC Metro
+  location_cv: NYC Metro Area · Princeton, NJ · Boston, MA
+  available_cv: Available now
   phone: 609-686-9411
   email: dannyrollo4@gmail.com
   email_academic: rollo.l@northeastern.edu
@@ -40,9 +40,10 @@ identity:
   resume_pdf: media/Danny_Rollo_Resume.pdf
 
 research_interests: >-
-  Deep learning for medical imaging and healthcare; efficient architectures for
-  low-data regimes; representation learning and recommender systems; imitation
-  learning for robotic manipulation; agentic LLM systems.
+  Deep learning for medical imaging and healthcare; machine learning for urban
+  planning and public transit; computer vision and representation learning for
+  football (soccer); recommender systems and cold-start generalization;
+  imitation learning for robotic manipulation; agentic LLM systems.
 
 # ════════════════════════════════════════════════════════════════════════════
 #  METRICS — each number lives exactly once.
@@ -116,8 +117,8 @@ education:
     location: Boston, MA
     degree: M.S. in Computer Science
     degree_short: M.S. Computer Science
-    date: Sept 2024 – Expected May 2026
-    date_short: May 2026
+    date: Sept 2024 – April 2026
+    date_short: April 2026
     coursework_label: Graduate coursework
     coursework: >-
       Applied Deep Learning, Deep Learning, Machine Learning, Algorithms,
@@ -130,8 +131,9 @@ education:
     date_short: May 2025
     coursework_label: Undergraduate coursework
     coursework: >-
-      AI4Impact, Matrix Methods in Machine Learning & Data Analysis, Systems
-      Security, Object-Oriented Design, Statistics & Stochastic Processes
+      AI4Impact, Matrix Methods in Machine Learning & Data Analysis,
+      Macroeconomics, Systems Security, Object-Oriented Design, Statistics &
+      Stochastic Processes
 
 # ════════════════════════════════════════════════════════════════════════════
 #  PUBLICATIONS
@@ -190,6 +192,7 @@ projects:
     site_order: 1
     cv_rank: 2
     resume: true
+    research_rank: 2
     title: Two-Tower Recommendation with Cold Start Ablation
     tag: Research · Recommender Systems
     tag_class: type-research
@@ -267,6 +270,18 @@ projects:
     links:
       - {label: Paper (coming soon), href: "#", disabled: true, title: Paper draft in progress}
       - {label: GitHub, href: "https://github.com/Bedrockdude10/cs7180-platemate", external: true}
+    research_bullets:
+      - >-
+        Designed a leave-one-out evaluation protocol that eliminates test-set
+        leakage when a subject's only observed signal comes from held-out data.
+      - >-
+        Ran a {{ m.twotower.experiments }}-experiment ablation over
+        {{ m.twotower.reviews }} records, isolating each feature group's
+        contribution to predictive performance across subpopulations.
+      - >-
+        Found situational context outperforms individual history on
+        sparse-history subjects by {{ m.twotower.cold_user_gain }} NDCG@10
+        points — an asymmetry in which covariates carry signal by subgroup.
     cv_bullets:
       - >-
         Found context features alone (day-of-week, distance, restaurant
@@ -293,6 +308,7 @@ projects:
     site_order: 2
     cv_rank: 1
     resume: true
+    research_rank: 3
     site_id: nucleus-segmentation
     title: Lightweight CNN Encoders for Nucleus Segmentation
     tag: MICCAI 2026 · Poster
@@ -355,6 +371,16 @@ projects:
     links:
       - {label: Paper (PDF), href: "media/final_report.pdf", external: true}
       - {label: GitHub, href: "https://github.com/Bedrockdude10/BinaryCellSegmentation", external: true}
+    research_bullets:
+      - >-
+        Sole-authored a peer-reviewed paper accepted to MICCAI 2026: designed
+        the study, ran every experiment, produced all figures, and wrote the
+        analysis.
+      - >-
+        Built a controlled ablation holding decoder, augmentation, and
+        optimisation schedule fixed to identify the effect of a single design
+        choice — establishing a {{ m.nucleus.params }}-parameter model matches a
+        specialised baseline at {{ m.nucleus.param_ratio }} fewer parameters.
     cv_bullets:
       - >-
         Designed and ran a controlled encoder ablation isolating encoder choice
@@ -447,6 +473,7 @@ projects:
     site_order: 4
     cv_rank: 4
     resume: true
+    research_rank: 1
     title: RailMax
     title_cv: "RailMax: Amtrak Service Optimizer"
     tag: Machine Learning · Public Transit
@@ -491,10 +518,26 @@ projects:
     links:
       - {label: GitHub, href: "https://github.com/Bedrockdude10/RailMax", external: true}
       - {label: Interactive Map, href: "https://bedrockdude10.github.io/RailMax/results/underservice_map.html", external: true}
+    research_bullets:
+      - >-
+        Harmonized four federal data sources (Census ACS, GTFS, NTAD, IPEDS)
+        into a station-level cross-section covering {{ m.railmax.stations }} US
+        Amtrak stations.
+      - >-
+        Estimated expected ridership with an Explainable Boosting Machine (R² = {{ m.railmax.r2 }}) and used the actual-to-predicted
+        residual as a measure of service underprovision — identifying which
+        communities receive less service than their demand supports.
+      - >-
+        Guarded against spatial autocorrelation by clustering stations
+        geographically for grouped {{ m.railmax.folds }}-fold cross-validation,
+        preventing leakage between neighbouring stops.
+      - >-
+        Documented systematic underprediction at major hubs as a limitation of
+        additive cross-sectional modelling at network convergence points.
     cv_bullets:
       - >-
-        Modeled the US Amtrak network as a directed weighted graph and
-        engineered node-level features including destination-population-weighted
+        Modeled the US Amtrak network as a directed weighted graph (edges =
+        weekly trips between station pairs) and engineered node-level features including destination-population-weighted
         reachability and eigenvector centrality.
       - >-
         Trained an Explainable Boosting Machine (R² = {{ m.railmax.r2 }}, RMSE
@@ -802,9 +845,10 @@ honors:
 # Each skill is named once. `resume_max` caps how many appear on the 1-page
 # resume (most important first); the CV always shows the full list.
 skills:
-  - label: Languages
+  - label: Languages & Core Libraries
     resume: true
-    items: [Python, Go, TypeScript/JavaScript, SQL]
+    research: true
+    items: [Python, Go, TypeScript/JavaScript, SQL, pandas, NumPy]
   - label: Deep Learning
     resume: true
     resume_max: 6
@@ -813,6 +857,7 @@ skills:
             imitation learning]
   - label: Machine Learning
     resume: true
+    research: true
     resume_max: 6
     items: [scikit-learn, InterpretML (EBM), gradient boosting, PCA, SVM,
             collaborative filtering, two-tower retrieval, ablation design,
@@ -820,14 +865,24 @@ skills:
   - label: LLM & Agentic Systems
     resume: true
     resume_max: 6
-    items: [Claude and OpenAI APIs, MCP servers, multi-agent orchestration, RAG,
-            SentenceTransformers, vector search, NeMo Guardrails, OpenTelemetry]
+    items: [Claude and OpenAI APIs, MCP servers, multi-agent orchestration,
+            prompt engineering, RAG, SentenceTransformers, vector search,
+            NeMo Guardrails, OpenTelemetry]
   - label: Infrastructure
     resume: true
     resume_max: 5
-    items: [Docker, AWS (S3), FastAPI, MongoDB Atlas, SLURM / HPC clusters, Git]
+    items: [Docker, AWS (S3), FastAPI, MongoDB Atlas, Git]
+  - label: Statistical & Research Computing
+    research: true
+    items: [Stata (coursework), R (basic), scipy, LaTeX, Unix/Linux,
+            SLURM / HPC clusters]
   - label: Data & Visualization
-    items: [pandas, NumPy, Folium, Streamlit, GTFS, Census ACS]
+    items: [Folium, Streamlit, GTFS, Census ACS]
+
+# Shown only on the research-targeted resume, ordered for a quantitative reader.
+quantitative_coursework: >-
+  Statistics & Stochastic Processes, Macroeconomics, Matrix Methods in Machine
+  Learning & Data Analysis, Algorithms, Machine Learning
 
 languages: Latin (limited working); English (native).
 

@@ -4,6 +4,7 @@
     data/cv.yml  ──▶  index.html      (website)
                  ──▶  cv.tex          (4-page academic CV)
                  ──▶  resume.tex      (1-page industry resume)
+                 ──▶  resume-research.tex (1-page research/econ resume)
 
 Prose fields in cv.yml use a neutral inline markup (**bold**, *italic*,
 `code`) plus real unicode, and may reference any metric as {{ m.group.key }}.
@@ -158,7 +159,8 @@ DEFAULTS = {
     "projects": {"site_id": None, "meta": None, "media": [], "detail_groups": [],
                  "links": [], "title_cv": None, "dates": None, "role_cv": None,
                  "stack_cv": None, "cv_bullets": [], "resume": False,
-                 "cv_rank": None, "subtitle": None},
+                 "cv_rank": None, "subtitle": None,
+                 "research_rank": None, "research_bullets": []},
     "experience": {"title_short": None, "org_cv": None, "site_summary": None,
                    "date_short": None, "location": None, "resume": False,
                    "bullets": [], "roles": [], "org_short": None},
@@ -166,7 +168,8 @@ DEFAULTS = {
                  "date_short": None, "resume": False, "bullets": [],
                  "course": None, "org_short": None},
     "honors": {"resume": False, "note": None, "title_short": None},
-    "skills": {"resume": False, "resume_max": None},
+    "skills": {"resume": False, "resume_max": None,
+               "research": False, "research_max": None},
 }
 MEDIA_DEFAULTS = {"position": None, "type": None, "html": None, "src": None,
                   "alt": None, "caption": None, "title": None, "videos": []}
@@ -204,6 +207,11 @@ def load():
         key=lambda p: p["cv_rank"],
     )
     data["resume_projects"] = [p for p in data["cv_projects"] if p.get("resume")]
+    data["research_projects"] = sorted(
+        [p for p in data["projects"] if p.get("research_rank")],
+        key=lambda p: p["research_rank"],
+    )
+    data["research_skills"] = [s for s in data["skills"] if s.get("research")]
     data["resume_experience"] = [e for e in data["experience"] if e.get("resume")]
     data["resume_skills"] = [s for s in data["skills"] if s.get("resume")]
     data["resume_honors"] = [h for h in data["honors"] if h.get("resume")]
@@ -237,23 +245,58 @@ def env_for(target):
     return env
 
 
+# (template, output, escaper, extra context)
+#
+# These three are the documents you actually maintain: the site, the CV, and
+# one resume. They are the only committed outputs.
 TARGETS = [
-    ("index.html.j2", "index.html", "html"),
-    ("cv.tex.j2", "cv.tex", "tex"),
-    ("resume.tex.j2", "resume.tex", "tex"),
+    ("index.html.j2", "index.html", "html", {}),
+    ("cv.tex.j2", "cv.tex", "tex", {}),
+    ("resume.tex.j2", "resume.tex", "tex", {"variant": "ml"}),
 ]
+
+# Disposable, built on demand with --targeted for a specific application.
+# Not committed, not linked from the site. Generate it, send it, forget it.
+TARGETED = [
+    ("resume.tex.j2", "resume-research.tex", "tex", {"variant": "research"}),
+]
+
+
+def variant_context(data, variant):
+    """Pick the project ordering, bullets, and skills for one resume variant."""
+    if variant == "research":
+        projects = data["research_projects"]
+        skills = data["research_skills"]
+    else:
+        projects = data["resume_projects"]
+        skills = data["resume_skills"]
+    out = []
+    for p in projects:
+        p = dict(p)
+        if variant == "research" and p["research_bullets"]:
+            p["pick_bullets"] = p["research_bullets"]
+        else:
+            p["pick_bullets"] = p["cv_bullets"]
+        out.append(p)
+    return {"r_projects": out, "r_skills": skills}
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--check", action="store_true",
                     help="fail if any target is stale instead of writing")
+    ap.add_argument("--targeted", action="store_true",
+                    help="also render the research-targeted resume (not committed)")
     args = ap.parse_args()
 
     data = load()
     stale = []
-    for template, output, target in TARGETS:
-        rendered = env_for(target).get_template(template).render(**data)
+    targets = TARGETS + (TARGETED if args.targeted else [])
+    for template, output, target, extra in targets:
+        ctx = dict(data, **extra)
+        if "variant" in extra:
+            ctx.update(variant_context(data, extra["variant"]))
+        rendered = env_for(target).get_template(template).render(**ctx)
         path = ROOT / output
         current = path.read_text() if path.exists() else None
         if args.check:
