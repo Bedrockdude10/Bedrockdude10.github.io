@@ -90,6 +90,26 @@ metrics:
     d_act_from: "4"
     d_act_to: "32"
     team: "3"
+  njt:
+    otp_njt: 88%
+    otp_5min: 80.6%
+    otp_15min: 95.4%
+    gap: 7.3 pt
+    njt_threshold: 6-minute
+    p90: 9m 22s
+    median: 1m 18s
+    reports_since: "2017"
+    lines: "12"
+  sketches:
+    ped_speed: 3.5 ft/s
+  crosswalks:
+    crossings: "84"
+    locations: "44"
+    photos: "72"
+    good: "22"
+    fair: "32"
+    bad: "10"
+    unmarked: "20"
   embeddings:
     model: all-mpnet-base-v2
     dims: 768
@@ -178,7 +198,7 @@ publications:
       leave-one-out onboarding protocol that prevents test-set leakage on cold
       users.
     links:
-      - {label: Code, href: "https://github.com/Bedrockdude10/cs7180-platemate", external: true}
+      - {label: Code, href: "https://github.com/Bedrockdude10/restaurant-cold-start-recsys", external: true}
 
 # ════════════════════════════════════════════════════════════════════════════
 #  PROJECTS
@@ -269,7 +289,7 @@ projects:
       profiles, and geographic negative sampling
     links:
       - {label: Paper (coming soon), href: "#", disabled: true, title: Paper draft in progress}
-      - {label: GitHub, href: "https://github.com/Bedrockdude10/cs7180-platemate", external: true}
+      - {label: GitHub, href: "https://github.com/Bedrockdude10/restaurant-cold-start-recsys", external: true}
     research_bullets:
       - >-
         Designed a leave-one-out evaluation protocol that eliminates test-set
@@ -550,8 +570,216 @@ projects:
         top-{{ m.railmax.top_pairs }} city pairs most likely to benefit from
         added service.
 
-  - id: booker
+  - id: njt
     site_order: 5
+    cv_rank: 5
+    research_rank: 4
+    title: NJ Transit Reliability Tracker
+    title_cv: "NJ Transit Reliability Tracker: Independent OTP Measurement"
+    tag: Data Systems · Public Transit
+    tag_class: type-ml
+    dates: 2026
+    role_cv: Sole author · live public deployment
+    stack_cv: Cloudflare Workers, GTFS-Realtime, SQL, TypeScript
+    subtitle: >-
+      A live public tracker that continuously ingests NJ Transit's
+      GTFS-Realtime feed and recomputes on-time performance at stricter
+      thresholds than the agency's own {{ m.njt.njt_threshold }} definition —
+      NJT reports {{ m.njt.otp_njt }}, independent measurement puts it at
+      {{ m.njt.otp_5min }} within 5 minutes, a {{ m.njt.gap }} gap.
+    tech: [TypeScript, Cloudflare Workers, GTFS / GTFS-Realtime, SQL,
+           Time-Series Ingestion, Statistical Change Detection, Data Viz]
+    detail_groups:
+      - heading: What It Measures
+        items:
+          - >-
+            **The definition gap:** NJT counts a train on time within
+            {{ m.njt.njt_threshold }} of schedule at its final terminal.
+            Recomputing the same trains from the live feed gives
+            {{ m.njt.otp_5min }} at 5 minutes and {{ m.njt.otp_15min }} at 15 —
+            a single headline percentage hides the distribution.
+          - >-
+            **Full delay distribution** rather than one rate: median
+            {{ m.njt.median }} against a P90 of {{ m.njt.p90 }}, plus
+            time-of-day and day-of-week heatmaps that locate *when* the tail
+            actually falls.
+          - >-
+            **Change detection with a significance gate** — week-over-week line
+            movements are only called out when the swing is unlikely to be
+            chance, so low-frequency lines need a larger shift to qualify.
+          - >-
+            **Connection reliability:** for a given transfer, the share of days
+            the outbound train was still catchable given the inbound's actual
+            arrival; transfers under 30 observations are marked preliminary.
+          - >-
+            **Honest empty states:** no synthetic sample data — measured views
+            read "no data yet" until enough real trains are observed, and a
+            Health page tracks coverage gaps in NJT's published months.
+      - heading: Engineering
+        items:
+          - >-
+            Continuous per-train arrival collection on Cloudflare Workers,
+            running unattended since July 2026 with scheduled ingest.
+          - >-
+            Joins three feeds of differing cadence — GTFS static schedule,
+            monthly published performance reports back to {{ m.njt.reports_since }},
+            and the live realtime stream — into one queryable store.
+          - >-
+            Every figure is labelled by provenance (NJT official vs.
+            independently measured) so the two are never silently mixed.
+    media:
+      - type: embed
+        src: https://nj-transit-reliability-tracker.dannyrollo4.workers.dev/
+        title: NJ Transit Reliability Tracker
+    links:
+      - {label: Live Tracker, href: "https://nj-transit-reliability-tracker.dannyrollo4.workers.dev/", external: true}
+    research_bullets:
+      - >-
+        Built a continuously-collecting measurement system that independently
+        recomputes a public agency's self-reported performance metric,
+        surfacing a {{ m.njt.gap }} gap attributable to definitional choice
+        rather than to any change in service.
+      - >-
+        Applied a significance gate to period-over-period comparisons so that
+        low-volume strata require larger effects before a change is reported.
+    cv_bullets:
+      - >-
+        Built and deployed a live public reliability tracker for NJ Transit
+        commuter rail on Cloudflare Workers, continuously ingesting
+        GTFS-Realtime arrivals and recomputing on-time performance at stricter
+        thresholds than the agency's published {{ m.njt.njt_threshold }}
+        definition ({{ m.njt.otp_njt }} official vs. {{ m.njt.otp_5min }}
+        measured at 5 minutes).
+      - >-
+        Reported full delay distributions, time-of-day and day-of-week
+        heatmaps, and transfer-connection reliability in place of a single
+        headline rate, with a significance gate suppressing spurious
+        week-over-week movements on low-frequency lines.
+      - >-
+        Unified three sources of differing cadence — GTFS static, monthly
+        published performance reports back to {{ m.njt.reports_since }}, and
+        the realtime feed — with per-figure provenance labelling separating
+        official from independently measured numbers.
+
+  - id: sketches
+    site_order: 6
+    cv_rank: 6
+    title: Hopewell Road Sketches
+    title_cv: "Hopewell Road Sketches: Parametric Street-Safety Modeling"
+    tag: Computational Geometry · Urban Planning
+    tag_class: type-ml
+    dates: 2026
+    role_cv: Sole author · open source
+    stack_cv: Python, geopandas, shapely, trimesh, Blender
+    subtitle: >-
+      A parametric pipeline that generates to-scale before/after pedestrian
+      safety visualizations for real intersections from field measurements,
+      NJDOT road data, and OpenStreetMap geometry — producing 2D plan views and
+      3D renders where every dimension traces to a source.
+    tech: [Python, geopandas, shapely, trimesh, Blender, matplotlib,
+           OpenStreetMap / Overpass, NJDOT SLD, pytest / Hypothesis]
+    detail_groups:
+      - heading: Approach
+        items:
+          - >-
+            **Four-phase pipeline:** audit and validate road-network geometry →
+            build curb lines and corner fillets from site configuration → apply
+            design treatments and render 2D comparisons → export to JSON for
+            Blender 3D rendering.
+          - >-
+            **Sourced, not guessed:** building heights from property tax
+            assessor records, crosswalk positions from OSM survey data,
+            footprints from OSM outlines, signal configurations verified
+            against street-view imagery — the guiding rule is never to
+            substitute a generic geometric assumption where real data exists.
+          - >-
+            **Quantified outcomes** rather than illustrations: crossing
+            distance reduction measured from geometry, time-in-roadway computed
+            at the MUTCD pedestrian speed of {{ m.sketches.ped_speed }} across
+            actual travel-lane widths, turn speed from the AASHTO curve
+            formula at tightened corners, and parking impact counted from paint
+            geometry.
+          - >-
+            **Regression and property-based testing** (pytest + Hypothesis)
+            caught real defects a visual review would not: a 15 sq ft
+            disagreement between the 2D and 3D crossing bands, driveway
+            openings rendered inconsistently across views, and a drawing-extent
+            setting silently determining junction membership.
+    links:
+      - {label: GitHub, href: "https://github.com/Bedrockdude10/hopewell-road-sketches", external: true}
+    cv_bullets:
+      - >-
+        Built a parametric geometry pipeline (geopandas, shapely, trimesh) that
+        generates to-scale 2D and 3D before/after street-design comparisons for
+        real intersections from NJDOT road data, OpenStreetMap geometry, and
+        field measurements.
+      - >-
+        Computed safety outcomes from first principles — crossing distance,
+        pedestrian time-in-roadway at MUTCD {{ m.sketches.ped_speed }}, AASHTO
+        turn speed at tightened corner radii, and parking loss from paint
+        geometry — with every input traced to an authoritative source rather
+        than a geometric default.
+      - >-
+        Enforced cross-representation consistency with regression and
+        property-based tests, surfacing geometry defects between the 2D and 3D
+        pipelines that visual inspection had missed.
+
+  - id: crashes
+    site_order: 7
+    cv_rank: 7
+    title: Hopewell Area Crash & Crosswalk Map
+    title_cv: "Hopewell Area Crash & Crosswalk Map"
+    tag: Civic Data · Public Safety
+    tag_class: type-product
+    dates: 2026
+    role_cv: Sole author · open source, in public use
+    stack_cv: Leaflet, Python, OpenStreetMap, GitHub Pages
+    subtitle: >-
+      An interactive map of vehicle crashes and pedestrian/cyclist incidents in
+      Hopewell Borough, NJ, paired with a field-surveyed inventory of
+      {{ m.crosswalks.crossings }} crosswalks across
+      {{ m.crosswalks.locations }} locations and a repaving priority score
+      built to inform local infrastructure decisions.
+    tech: [Leaflet, JavaScript, Python, OpenStreetMap, Google Sheets CSV feed,
+           GitHub Pages]
+    detail_groups:
+      - heading: What It Does
+        items:
+          - >-
+            **Field survey:** {{ m.crosswalks.crossings }} crossings graded in
+            person with {{ m.crosswalks.photos }} photographs —
+            {{ m.crosswalks.good }} good, {{ m.crosswalks.fair }} fair,
+            {{ m.crosswalks.bad }} bad, and {{ m.crosswalks.unmarked }}
+            unmarked.
+          - >-
+            **Priority scoring** that combines proximity to documented crash
+            harm, survey deficiency grades, street repaving cycles, and
+            surveyor recommendations into a ranked repaving order.
+          - >-
+            **Crossing geometry** derived from OSM `footway=crossing` ways
+            where they exist and computed from road centerlines where they
+            don't.
+          - >-
+            **Live data path:** crash reports flow from a published Google
+            Sheet CSV straight into a single-file Leaflet front end, so the map
+            stays current without a rebuild; Python scripts regenerate the
+            crosswalk JSON and photo set after survey corrections.
+    links:
+      - {label: GitHub, href: "https://github.com/Bedrockdude10/hopewell-boro-crashes", external: true}
+    cv_bullets:
+      - >-
+        Built an interactive crash and pedestrian-infrastructure map for
+        Hopewell Borough, NJ, combining incident records with a personally
+        conducted field survey of {{ m.crosswalks.crossings }} crosswalks
+        across {{ m.crosswalks.locations }} locations.
+      - >-
+        Designed a repaving priority score integrating crash-harm proximity,
+        survey condition grades, and municipal paving cycles, and derived
+        crossing geometry from OpenStreetMap with a road-centerline fallback
+        for unmapped crossings.
+
+  - id: booker
+    site_order: 8
     title: Booker
     tag: Agentic AI
     tag_class: type-agentic
@@ -606,7 +834,7 @@ projects:
       - {label: Live Demo, href: "https://booker-hjbdoiu5fobsifeuwwnpsg.streamlit.app/", external: true}
 
   - id: translation
-    site_order: 6
+    site_order: 9
     title: Attention-Based Machine Translation
     tag: Deep Learning
     tag_class: type-dl
@@ -633,7 +861,7 @@ projects:
       - {label: GitHub, href: "https://github.com/bedrockdude10/attention-translation", external: true}
 
   - id: platemate
-    site_order: 7
+    site_order: 10
     title: PlateMate
     tag: Startup · ML Product
     tag_class: type-product
@@ -658,7 +886,7 @@ projects:
       - {label: GitHub, href: "https://github.com/PlateMate-App", external: true}
 
   - id: cancer
-    site_order: 8
+    site_order: 11
     title: Cancer Cell Classification
     tag: Machine Learning
     tag_class: type-ml

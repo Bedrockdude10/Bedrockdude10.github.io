@@ -59,7 +59,7 @@
             Manuscript in preparation. A 12-experiment ablation on a dual-encoder retrieval model over 1.3M Yelp reviews, with a leave-one-out onboarding protocol that prevents test-set leakage on cold users.
         </p>
         <div class="project-links">
-            <a href="https://github.com/Bedrockdude10/cs7180-platemate" target="_blank">Code →</a>
+            <a href="https://github.com/Bedrockdude10/restaurant-cold-start-recsys" target="_blank">Code →</a>
         </div>
     </div>
 
@@ -122,7 +122,7 @@
 
         <div class="project-links">
             <a href="#" aria-disabled="true" title="Paper draft in progress" class="link-disabled">Paper (coming soon) →</a>
-            <a href="https://github.com/Bedrockdude10/cs7180-platemate" target="_blank">GitHub →</a>
+            <a href="https://github.com/Bedrockdude10/restaurant-cold-start-recsys" target="_blank">GitHub →</a>
         </div>
     </div>
 
@@ -259,6 +259,123 @@
         <div class="project-links">
             <a href="https://github.com/Bedrockdude10/RailMax" target="_blank">GitHub →</a>
             <a href="https://bedrockdude10.github.io/RailMax/results/underservice_map.html" target="_blank">Interactive Map →</a>
+        </div>
+    </div>
+
+    <!-- NJ Transit Reliability Tracker -->
+    <div class="project fade-in">
+        <div class="project-header">
+            <h3>NJ Transit Reliability Tracker</h3>
+            <span class="project-type type-ml">Data Systems · Public Transit</span>
+        </div>
+        <p class="project-subtitle">A live public tracker that continuously ingests NJ Transit's GTFS-Realtime feed and recomputes on-time performance at stricter thresholds than the agency's own 6-minute definition — NJT reports 88%, independent measurement puts it at 80.6% within 5 minutes, a 7.3 pt gap.</p>
+
+        <div class="tech-grid">
+            <span class="tech-tag">TypeScript</span>
+            <span class="tech-tag">Cloudflare Workers</span>
+            <span class="tech-tag">GTFS / GTFS-Realtime</span>
+            <span class="tech-tag">SQL</span>
+            <span class="tech-tag">Time-Series Ingestion</span>
+            <span class="tech-tag">Statistical Change Detection</span>
+            <span class="tech-tag">Data Viz</span>
+        </div>
+
+        <div class="project-details">
+            <h4>What It Measures</h4>
+            <ul class="detail-list">
+                <li><strong>The definition gap:</strong> NJT counts a train on time within 6-minute of schedule at its final terminal. Recomputing the same trains from the live feed gives 80.6% at 5 minutes and 95.4% at 15 — a single headline percentage hides the distribution.</li>
+                <li><strong>Full delay distribution</strong> rather than one rate: median 1m 18s against a P90 of 9m 22s, plus time-of-day and day-of-week heatmaps that locate <em>when</em> the tail actually falls.</li>
+                <li><strong>Change detection with a significance gate</strong> — week-over-week line movements are only called out when the swing is unlikely to be chance, so low-frequency lines need a larger shift to qualify.</li>
+                <li><strong>Connection reliability:</strong> for a given transfer, the share of days the outbound train was still catchable given the inbound's actual arrival; transfers under 30 observations are marked preliminary.</li>
+                <li><strong>Honest empty states:</strong> no synthetic sample data — measured views read "no data yet" until enough real trains are observed, and a Health page tracks coverage gaps in NJT's published months.</li>
+            </ul>
+        </div>
+
+        <div class="project-details">
+            <h4>Engineering</h4>
+            <ul class="detail-list">
+                <li>Continuous per-train arrival collection on Cloudflare Workers, running unattended since July 2026 with scheduled ingest.</li>
+                <li>Joins three feeds of differing cadence — GTFS static schedule, monthly published performance reports back to 2017, and the live realtime stream — into one queryable store.</li>
+                <li>Every figure is labelled by provenance (NJT official vs. independently measured) so the two are never silently mixed.</li>
+            </ul>
+        </div>
+
+        <div class="embed-container">
+            <iframe
+                src="https://nj-transit-reliability-tracker.dannyrollo4.workers.dev/"
+                title="NJ Transit Reliability Tracker"
+            ></iframe>
+        </div>
+
+        <div class="project-links">
+            <a href="https://nj-transit-reliability-tracker.dannyrollo4.workers.dev/" target="_blank">Live Tracker →</a>
+        </div>
+    </div>
+
+    <!-- Hopewell Road Sketches -->
+    <div class="project fade-in">
+        <div class="project-header">
+            <h3>Hopewell Road Sketches</h3>
+            <span class="project-type type-ml">Computational Geometry · Urban Planning</span>
+        </div>
+        <p class="project-subtitle">A parametric pipeline that generates to-scale before/after pedestrian safety visualizations for real intersections from field measurements, NJDOT road data, and OpenStreetMap geometry — producing 2D plan views and 3D renders where every dimension traces to a source.</p>
+
+        <div class="tech-grid">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">geopandas</span>
+            <span class="tech-tag">shapely</span>
+            <span class="tech-tag">trimesh</span>
+            <span class="tech-tag">Blender</span>
+            <span class="tech-tag">matplotlib</span>
+            <span class="tech-tag">OpenStreetMap / Overpass</span>
+            <span class="tech-tag">NJDOT SLD</span>
+            <span class="tech-tag">pytest / Hypothesis</span>
+        </div>
+
+        <div class="project-details">
+            <h4>Approach</h4>
+            <ul class="detail-list">
+                <li><strong>Four-phase pipeline:</strong> audit and validate road-network geometry → build curb lines and corner fillets from site configuration → apply design treatments and render 2D comparisons → export to JSON for Blender 3D rendering.</li>
+                <li><strong>Sourced, not guessed:</strong> building heights from property tax assessor records, crosswalk positions from OSM survey data, footprints from OSM outlines, signal configurations verified against street-view imagery — the guiding rule is never to substitute a generic geometric assumption where real data exists.</li>
+                <li><strong>Quantified outcomes</strong> rather than illustrations: crossing distance reduction measured from geometry, time-in-roadway computed at the MUTCD pedestrian speed of 3.5 ft/s across actual travel-lane widths, turn speed from the AASHTO curve formula at tightened corners, and parking impact counted from paint geometry.</li>
+                <li><strong>Regression and property-based testing</strong> (pytest + Hypothesis) caught real defects a visual review would not: a 15 sq ft disagreement between the 2D and 3D crossing bands, driveway openings rendered inconsistently across views, and a drawing-extent setting silently determining junction membership.</li>
+            </ul>
+        </div>
+
+        <div class="project-links">
+            <a href="https://github.com/Bedrockdude10/hopewell-road-sketches" target="_blank">GitHub →</a>
+        </div>
+    </div>
+
+    <!-- Hopewell Area Crash & Crosswalk Map -->
+    <div class="project fade-in">
+        <div class="project-header">
+            <h3>Hopewell Area Crash & Crosswalk Map</h3>
+            <span class="project-type type-product">Civic Data · Public Safety</span>
+        </div>
+        <p class="project-subtitle">An interactive map of vehicle crashes and pedestrian/cyclist incidents in Hopewell Borough, NJ, paired with a field-surveyed inventory of 84 crosswalks across 44 locations and a repaving priority score built to inform local infrastructure decisions.</p>
+
+        <div class="tech-grid">
+            <span class="tech-tag">Leaflet</span>
+            <span class="tech-tag">JavaScript</span>
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">OpenStreetMap</span>
+            <span class="tech-tag">Google Sheets CSV feed</span>
+            <span class="tech-tag">GitHub Pages</span>
+        </div>
+
+        <div class="project-details">
+            <h4>What It Does</h4>
+            <ul class="detail-list">
+                <li><strong>Field survey:</strong> 84 crossings graded in person with 72 photographs — 22 good, 32 fair, 10 bad, and 20 unmarked.</li>
+                <li><strong>Priority scoring</strong> that combines proximity to documented crash harm, survey deficiency grades, street repaving cycles, and surveyor recommendations into a ranked repaving order.</li>
+                <li><strong>Crossing geometry</strong> derived from OSM <code>footway=crossing</code> ways where they exist and computed from road centerlines where they don't.</li>
+                <li><strong>Live data path:</strong> crash reports flow from a published Google Sheet CSV straight into a single-file Leaflet front end, so the map stays current without a rebuild; Python scripts regenerate the crosswalk JSON and photo set after survey corrections.</li>
+            </ul>
+        </div>
+
+        <div class="project-links">
+            <a href="https://github.com/Bedrockdude10/hopewell-boro-crashes" target="_blank">GitHub →</a>
         </div>
     </div>
 
