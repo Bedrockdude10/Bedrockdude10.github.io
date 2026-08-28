@@ -492,7 +492,7 @@ projects:
   - id: railmax
     site_order: 4
     cv_rank: 4
-    resume: true
+    resume: false
     research_rank: 1
     title: RailMax
     title_cv: "RailMax: Amtrak Service Optimizer"
@@ -910,6 +910,34 @@ projects:
 #  PROFESSIONAL EXPERIENCE
 # ════════════════════════════════════════════════════════════════════════════
 experience:
+  - org: Pitchcut
+    site_order: 0
+    resume: true
+    title: Founder & CTO
+    location: Remote
+    date: June 2026 – Present
+    date_short: 2026–Present
+    site_summary: >-
+      Multi-tenant SaaS platform for grassroots football clubs, combining a
+      computer-vision analytics pipeline with an agentic content-generation
+      back office.
+    bullets:
+      - >-
+        Architected a multi-tenant SaaS platform for grassroots football
+        clubs (Postgres/Supabase, row-level tenant isolation) combining
+        CV-based match analytics with an agentic content-generation
+        pipeline.
+      - >-
+        Built a computer-vision pipeline (tracking, event/goal detection,
+        player re-identification) validated against SoccerTrack v2 ground
+        truth, plus a consent-gated data flywheel for training-set
+        collection.
+      - >-
+        Designed an agent-driven back office (Claude Code skills over a
+        typed domain layer) automating registration, roster, and content
+        drafting, with human-in-the-loop approval for all public-facing
+        actions.
+
   - org: Teradata
     site_order: 1
     resume: true
