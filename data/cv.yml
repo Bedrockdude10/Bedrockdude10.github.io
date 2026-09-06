@@ -128,6 +128,16 @@ metrics:
     benches: six
   teaching:
     students: 40+
+  pitchcut:
+    tiles: "17"
+    cuda_speedup: 2.4×
+    latency_before: 245ms
+    latency_after: 102ms
+    v100_ips: "26.8"
+    t4_ips: "3.75"
+    node_speedup: 7.1×
+    oauth_errors: "526"
+    oauth_window: ~16s
 
 # ════════════════════════════════════════════════════════════════════════════
 #  EDUCATION
@@ -780,9 +790,13 @@ projects:
 
   - id: booker
     site_order: 8
+    cv_rank: 8
     title: Booker
     tag: Agentic AI
     tag_class: type-agentic
+    dates: "2025"
+    role_cv: Sole author · live demo
+    stack_cv: Python, Claude API, MongoDB Atlas Vector Search, MCP
     subtitle: >-
       Multi-agent system for autonomous artist–venue matching with
       production-grade orchestration, semantic vector search, memory management,
@@ -832,6 +846,23 @@ projects:
     links:
       - {label: GitHub, href: "https://github.com/Bedrockdude10/Booker/tree/main/agent-demo", external: true}
       - {label: Live Demo, href: "https://booker-hjbdoiu5fobsifeuwwnpsg.streamlit.app/", external: true}
+    cv_bullets:
+      - >-
+        Built a multi-agent system for artist–venue booking matching: a
+        coordinator agent with bounded iterations routes to specialist
+        agents (artist, venue, booking advisor) via structured, typed tool
+        calls against the Claude API, preventing runaway agent loops by
+        construction.
+      - >-
+        Implemented semantic artist/venue discovery over MongoDB Atlas
+        Vector Search using `{{ m.embeddings.model }}` embeddings
+        ({{ m.embeddings.dims }}-dim), with a 3-tier memory system
+        (conversation, working, preferences) for context-aware multi-turn
+        interactions.
+      - >-
+        Enforced content safety and domain boundaries with NeMo Guardrails,
+        exposed the system via an MCP server for standardized Claude Desktop
+        tool interop, and instrumented it with OpenTelemetry tracing.
 
   - id: translation
     site_order: 9
@@ -937,6 +968,21 @@ experience:
         typed domain layer) automating registration, roster, and content
         drafting, with human-in-the-loop approval for all public-facing
         actions.
+      - >-
+        Optimized the CV pipeline's CUDA inference path (single-GPU-upload
+        tile cropping for {{ m.pitchcut.tiles }}-tile SAHI-style detection,
+        fp16 autocast) for a {{ m.pitchcut.cuda_speedup }} throughput gain
+        ({{ m.pitchcut.latency_before }} → {{ m.pitchcut.latency_after }}/frame)
+        over the CPU-tile fp32 baseline, auto-detected across CUDA/MPS/CPU
+        and parity-verified before shipping.
+      - >-
+        Built submitit-managed SLURM training infrastructure under Explorer's
+        single-GPU-per-job cap: throttled job arrays with checkpoint/resume,
+        node-throughput profiling that auto-excludes slow nodes
+        ({{ m.pitchcut.v100_ips }} img/s V100 vs. {{ m.pitchcut.t4_ips }} T4,
+        a {{ m.pitchcut.node_speedup }} gap), OAuth-storm-tuned retry/backoff
+        ({{ m.pitchcut.oauth_errors }} errors in {{ m.pitchcut.oauth_window }}),
+        and MLflow logging that survives SIGKILL-on-timeout.
 
   - org: Teradata
     site_order: 1
@@ -1126,8 +1172,9 @@ skills:
             NeMo Guardrails, OpenTelemetry]
   - label: Infrastructure
     resume: true
-    resume_max: 5
-    items: [Docker, AWS (S3), FastAPI, MongoDB Atlas, Git]
+    resume_max: 6
+    items: [Docker, AWS (S3), CUDA, SLURM job arrays, submitit, MLflow,
+            FastAPI, MongoDB Atlas, Git]
   - label: Statistical & Research Computing
     research: true
     items: [Stata (coursework), R (basic), scipy, LaTeX, Unix/Linux,
