@@ -63,6 +63,10 @@
 \section{Research Experience}
 
 <% for p in cv_projects %>
+<% if p.id == 'railmax' %>
+\section{Projects}
+
+<% endif %>
 \entry{<< (p.title_cv | default(p.title, true)) | tex >>}{<< p.dates | tex >>}
 \subentry{<< p.role_cv | tex >>}{<< p.stack_cv | tex >>}
 \begin{itemize}
