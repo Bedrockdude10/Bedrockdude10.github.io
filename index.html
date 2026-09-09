@@ -142,7 +142,7 @@
             <span class="tech-tag">VGG</span>
             <span class="tech-tag">Medical Imaging</span>
             <span class="tech-tag">PanNuke / MoNuSeg</span>
-            <span class="tech-tag">timm</span>
+            <span class="tech-tag">Hugging Face timm</span>
         </div>
 
         <div class="project-details">
@@ -385,7 +385,7 @@
             <h3>Booker</h3>
             <span class="project-type type-agentic">Agentic AI</span>
         </div>
-        <p class="project-subtitle">Multi-agent system for autonomous artist–venue matching with production-grade orchestration, semantic vector search, memory management, and safety guardrails.</p>
+        <p class="project-subtitle">Multi-agent system for autonomous artist–venue matching with production-grade orchestration, cross-modal semantic retrieval, memory management, and safety guardrails.</p>
 
         <div class="tech-grid">
             <span class="tech-tag">Python</span>
@@ -417,7 +417,7 @@
             <h4>Key Design Decisions</h4>
             <ul class="detail-list">
                 <li>Coordinator pattern with bounded iterations prevents runaway agent loops</li>
-                <li>MongoDB Atlas Vector Search with <code>all-mpnet-base-v2</code> embeddings (768-dim) for semantic artist/venue discovery by vibe and description</li>
+                <li>MongoDB Atlas Vector Search with <code>all-mpnet-base-v2</code> embeddings (768-dim) as a cross-modal representation-learning layer for artist/venue retrieval by vibe and description</li>
                 <li>3-tier memory (conversation, working, preferences) enables context-aware multi-turn interactions</li>
                 <li>NeMo Guardrails enforce content safety and domain boundaries at inference time</li>
                 <li>Structured tool use with Claude API for reliable, typed agent-to-tool communication</li>
@@ -435,6 +435,36 @@
         <div class="project-links">
             <a href="https://github.com/Bedrockdude10/Booker/tree/main/agent-demo" target="_blank">GitHub →</a>
             <a href="https://booker-hjbdoiu5fobsifeuwwnpsg.streamlit.app/" target="_blank">Live Demo →</a>
+        </div>
+    </div>
+
+    <!-- Quantitative Mix & Mastering Analysis Toolkit -->
+    <div class="project fade-in">
+        <div class="project-header">
+            <h3>Quantitative Mix & Mastering Analysis Toolkit</h3>
+            <span class="project-type type-ml">Audio Signal Processing</span>
+        </div>
+        <p class="project-subtitle">A CLI audio-analysis pipeline that replaces by-ear mixing judgment with STFT-based band-energy, spectral-centroid, and crest-factor metrics plus ITU-R BS.1770 loudness measurement, built for mixing my band's recordings.</p>
+
+        <div class="tech-grid">
+            <span class="tech-tag">Python</span>
+            <span class="tech-tag">librosa</span>
+            <span class="tech-tag">pyloudnorm</span>
+            <span class="tech-tag">scipy</span>
+            <span class="tech-tag">STFT</span>
+            <span class="tech-tag">ITU-R BS.1770 Loudness</span>
+            <span class="tech-tag">Sibilance Detection</span>
+        </div>
+
+        <div class="project-details">
+            <h4>What It Does</h4>
+            <ul class="detail-list">
+                <li>Built a CLI audio-analysis pipeline replacing by-ear mixing judgment with STFT-based band-energy, spectral-centroid, and crest-factor metrics, plus ITU-R BS.1770 loudness measurement, for mixing my band's recordings.</li>
+                <li>Implemented active-window sibilance detection (isolating singing from silence before comparing 5–10kHz to 1–4kHz energy) and per-track codec-transparency/album-consistency checks across a release.</li>
+            </ul>
+        </div>
+
+        <div class="project-links">
         </div>
     </div>
 
@@ -476,7 +506,7 @@
             <h3>PlateMate</h3>
             <span class="project-type type-product">Startup · ML Product</span>
         </div>
-        <p class="project-subtitle">AI-powered food recommendation platform using collaborative filtering, RAG-based semantic search, and vector similarity over restaurant reviews.</p>
+        <p class="project-subtitle">AI-powered food recommendation platform using collaborative filtering and cross-modal semantic retrieval over restaurant reviews via representation learning.</p>
 
         <div class="tech-grid">
             <span class="tech-tag">Python</span>
@@ -491,8 +521,8 @@
         <div class="project-details">
             <h4>Technical Highlights</h4>
             <ul class="detail-list">
-                <li>Hybrid recommendation engine: item-based collaborative filtering + semantic vector search</li>
-                <li>RAG pipeline with <code>all-mpnet-base-v2</code> embeddings (768-dim) for natural language dish queries</li>
+                <li>Hybrid recommendation engine: item-based collaborative filtering + cross-modal semantic retrieval</li>
+                <li>Representation-learning retrieval pipeline with <code>all-mpnet-base-v2</code> embeddings (768-dim) for natural language dish queries</li>
                 <li>Query parsing into semantic + structured filters with geo-aware retrieval</li>
                 <li>User-item interaction matrix for personalized collaborative filtering scores</li>
                 <li>CTO — leading architecture decisions, ML pipeline design, and team of engineers</li>

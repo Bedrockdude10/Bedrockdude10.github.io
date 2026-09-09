@@ -43,7 +43,8 @@ research_interests: >-
   Deep learning for medical imaging and healthcare; machine learning for urban
   planning and public transit; computer vision and representation learning for
   football (soccer); recommender systems and cold-start generalization;
-  imitation learning for robotic manipulation; agentic LLM systems.
+  imitation learning for robotic manipulation; audio and music signal
+  processing; agentic LLM systems.
 
 # ════════════════════════════════════════════════════════════════════════════
 #  METRICS — each number lives exactly once.
@@ -220,7 +221,7 @@ publications:
 projects:
   - id: twotower
     site_order: 1
-    cv_rank: 2
+    cv_rank: 3
     resume: true
     research_rank: 2
     title: Two-Tower Recommendation with Cold Start Ablation
@@ -320,9 +321,9 @@ projects:
         remain essential for cold restaurants — an asymmetry in feature
         importance across cold-start regimes.
       - >-
-        Designed a leave-one-out onboarding evaluation that prevents
-        information leakage when a cold user's only signal comes from held-out
-        reviews.
+        Designed a leave-one-out evaluation protocol preventing train/test
+        leakage, applied to the cold-start case where a user's only signal
+        comes from held-out reviews.
       - >-
         Built a 4-stage data pipeline (extract, preprocess, split, feature
         prep) with iterative interaction-density filtering and stratified
@@ -345,14 +346,14 @@ projects:
     tag_class: type-accepted
     dates: 2025–2026
     role_cv: Sole author · Northeastern University
-    stack_cv: PyTorch, timm, PanNuke, MoNuSeg
+    stack_cv: PyTorch, Hugging Face timm, PanNuke, MoNuSeg
     subtitle: >-
       Controlled encoder ablation showing a {{ m.nucleus.params }}-param VGG
       U-Net matches MedT (a transformer purpose-built for small medical
       datasets) and outperforms pretrained Swin-T on nucleus segmentation in
       the low-data regime.
     tech: [PyTorch, U-Net, Swin Transformer, ResNet, VGG, Medical Imaging,
-           PanNuke / MoNuSeg, timm]
+           PanNuke / MoNuSeg, Hugging Face timm]
     detail_groups:
       - heading: Key Findings
         items:
@@ -431,7 +432,7 @@ projects:
 
   - id: flow
     site_order: 3
-    cv_rank: 3
+    cv_rank: 2
     title: Flow Matching for Robotic Manipulation
     tag: Research · Robotics
     tag_class: type-dl
@@ -799,8 +800,8 @@ projects:
     stack_cv: Python, Claude API, MongoDB Atlas Vector Search, MCP
     subtitle: >-
       Multi-agent system for autonomous artist–venue matching with
-      production-grade orchestration, semantic vector search, memory management,
-      and safety guardrails.
+      production-grade orchestration, cross-modal semantic retrieval, memory
+      management, and safety guardrails.
     tech: [Python, Claude API, Go Backend, MongoDB Atlas Vector Search,
            Sentence Transformers, MCP Server, NeMo Guardrails, OpenTelemetry,
            Streamlit]
@@ -810,8 +811,9 @@ projects:
           - Coordinator pattern with bounded iterations prevents runaway agent loops
           - >-
             MongoDB Atlas Vector Search with `{{ m.embeddings.model }}`
-            embeddings ({{ m.embeddings.dims }}-dim) for semantic artist/venue
-            discovery by vibe and description
+            embeddings ({{ m.embeddings.dims }}-dim) as a cross-modal
+            representation-learning layer for artist/venue retrieval by vibe
+            and description
           - >-
             3-tier memory (conversation, working, preferences) enables
             context-aware multi-turn interactions
@@ -854,9 +856,9 @@ projects:
         calls against the Claude API, preventing runaway agent loops by
         construction.
       - >-
-        Implemented semantic artist/venue discovery over MongoDB Atlas
-        Vector Search using `{{ m.embeddings.model }}` embeddings
-        ({{ m.embeddings.dims }}-dim), with a 3-tier memory system
+        Implemented cross-modal semantic retrieval for artist/venue matching
+        over MongoDB Atlas Vector Search using `{{ m.embeddings.model }}`
+        embeddings ({{ m.embeddings.dims }}-dim), with a 3-tier memory system
         (conversation, working, preferences) for context-aware multi-turn
         interactions.
       - >-
@@ -864,8 +866,47 @@ projects:
         exposed the system via an MCP server for standardized Claude Desktop
         tool interop, and instrumented it with OpenTelemetry tracing.
 
-  - id: translation
+  - id: mixmaster
     site_order: 9
+    title: Quantitative Mix & Mastering Analysis Toolkit
+    tag: Audio Signal Processing
+    tag_class: type-ml
+    dates: 2026
+    role_cv: Sole author · personal use
+    stack_cv: Python, librosa, pyloudnorm, scipy
+    subtitle: >-
+      A CLI audio-analysis pipeline that replaces by-ear mixing judgment with
+      STFT-based band-energy, spectral-centroid, and crest-factor metrics plus
+      ITU-R BS.1770 loudness measurement, built for mixing my band's
+      recordings.
+    tech: [Python, librosa, pyloudnorm, scipy, STFT, ITU-R BS.1770 Loudness,
+           Sibilance Detection]
+    detail_groups:
+      - heading: What It Does
+        items:
+          - >-
+            Built a CLI audio-analysis pipeline replacing by-ear mixing
+            judgment with STFT-based band-energy, spectral-centroid, and
+            crest-factor metrics, plus ITU-R BS.1770 loudness measurement, for
+            mixing my band's recordings.
+          - >-
+            Implemented active-window sibilance detection (isolating singing
+            from silence before comparing 5–10kHz to 1–4kHz energy) and
+            per-track codec-transparency/album-consistency checks across a
+            release.
+    cv_bullets:
+      - >-
+        Built a CLI audio-analysis pipeline replacing by-ear mixing judgment
+        with STFT-based band-energy, spectral-centroid, and crest-factor
+        metrics, plus ITU-R BS.1770 loudness measurement, for mixing my
+        band's recordings.
+      - >-
+        Implemented active-window sibilance detection (isolating singing from
+        silence before comparing 5–10kHz to 1–4kHz energy) and per-track
+        codec-transparency/album-consistency checks across a release.
+
+  - id: translation
+    site_order: 10
     title: Attention-Based Machine Translation
     tag: Deep Learning
     tag_class: type-dl
@@ -892,13 +933,14 @@ projects:
       - {label: GitHub, href: "https://github.com/bedrockdude10/attention-translation", external: true}
 
   - id: platemate
-    site_order: 10
+    site_order: 11
     title: PlateMate
     tag: Startup · ML Product
     tag_class: type-product
     subtitle: >-
-      AI-powered food recommendation platform using collaborative filtering,
-      RAG-based semantic search, and vector similarity over restaurant reviews.
+      AI-powered food recommendation platform using collaborative filtering
+      and cross-modal semantic retrieval over restaurant reviews via
+      representation learning.
     tech: [Python, MongoDB Atlas Vector Search, Sentence Transformers,
            Collaborative Filtering, RAG Pipeline, AWS S3, React]
     detail_groups:
@@ -906,10 +948,11 @@ projects:
         items:
           - >-
             Hybrid recommendation engine: item-based collaborative filtering +
-            semantic vector search
+            cross-modal semantic retrieval
           - >-
-            RAG pipeline with `{{ m.embeddings.model }}` embeddings
-            ({{ m.embeddings.dims }}-dim) for natural language dish queries
+            Representation-learning retrieval pipeline with
+            `{{ m.embeddings.model }}` embeddings ({{ m.embeddings.dims }}-dim)
+            for natural language dish queries
           - Query parsing into semantic + structured filters with geo-aware retrieval
           - User-item interaction matrix for personalized collaborative filtering scores
           - CTO — leading architecture decisions, ML pipeline design, and team of engineers
@@ -917,7 +960,7 @@ projects:
       - {label: GitHub, href: "https://github.com/PlateMate-App", external: true}
 
   - id: cancer
-    site_order: 11
+    site_order: 12
     title: Cancer Cell Classification
     tag: Machine Learning
     tag_class: type-ml
@@ -954,20 +997,10 @@ experience:
       back office.
     bullets:
       - >-
-        Architected a multi-tenant SaaS platform for grassroots football
-        clubs (Postgres/Supabase, row-level tenant isolation) combining
-        CV-based match analytics with an agentic content-generation
-        pipeline.
-      - >-
         Built a computer-vision pipeline (tracking, event/goal detection,
-        player re-identification) validated against SoccerTrack v2 ground
-        truth, plus a consent-gated data flywheel for training-set
-        collection.
-      - >-
-        Designed an agent-driven back office (Claude Code skills over a
-        typed domain layer) automating registration, roster, and content
-        drafting, with human-in-the-loop approval for all public-facing
-        actions.
+        player re-identification) for grassroots football match footage,
+        validated against SoccerTrack v2 ground truth, with a consent-gated
+        data flywheel for continued training-set collection.
       - >-
         Optimized the CV pipeline's CUDA inference path (single-GPU-upload
         tile cropping for {{ m.pitchcut.tiles }}-tile SAHI-style detection,
@@ -980,9 +1013,13 @@ experience:
         single-GPU-per-job cap: throttled job arrays with checkpoint/resume,
         node-throughput profiling that auto-excludes slow nodes
         ({{ m.pitchcut.v100_ips }} img/s V100 vs. {{ m.pitchcut.t4_ips }} T4,
-        a {{ m.pitchcut.node_speedup }} gap), OAuth-storm-tuned retry/backoff
-        ({{ m.pitchcut.oauth_errors }} errors in {{ m.pitchcut.oauth_window }}),
+        a {{ m.pitchcut.node_speedup }} gap), OAuth-storm-tuned retry/backoff,
         and MLflow logging that survives SIGKILL-on-timeout.
+      - >-
+        Architected the surrounding multi-tenant SaaS platform
+        (Postgres/Supabase, row-level tenant isolation) and an agent-driven
+        back office (Claude Code skills) automating registration, roster,
+        and content drafting with human-in-the-loop approval.
 
   - org: Teradata
     site_order: 1
@@ -1021,13 +1058,13 @@ experience:
     bullets:
       - >-
         Lead ML architecture and engineering for a food recommendation platform:
-        hybrid item-based collaborative filtering plus semantic vector search
-        over restaurant reviews.
+        hybrid item-based collaborative filtering plus cross-modal semantic
+        retrieval over restaurant reviews.
       - >-
-        Built a RAG retrieval pipeline with {{ m.embeddings.dims }}-dimensional
-        `{{ m.embeddings.model }}` embeddings on MongoDB Atlas Vector Search,
-        parsing natural-language dish queries into semantic and structured
-        geo-aware filters.
+        Built a representation-learning retrieval pipeline with
+        {{ m.embeddings.dims }}-dimensional `{{ m.embeddings.model }}`
+        embeddings on MongoDB Atlas Vector Search, parsing natural-language
+        dish queries into semantic and structured geo-aware filters.
 
   - org: LineVision
     org_cv: LineVision Inc.
@@ -1154,7 +1191,7 @@ skills:
   - label: Deep Learning
     resume: true
     resume_max: 6
-    items: [PyTorch, timm, CNNs, U-Net, Vision Transformers (Swin),
+    items: [PyTorch, Hugging Face timm, CNNs, U-Net, Vision Transformers (Swin),
             Transformers & attention, flow matching, diffusion policies,
             imitation learning]
   - label: Machine Learning
@@ -1180,7 +1217,7 @@ skills:
     items: [Stata (coursework), R (basic), scipy, LaTeX, Unix/Linux,
             SLURM / HPC clusters]
   - label: Data & Visualization
-    items: [Folium, Streamlit, GTFS, Census ACS]
+    items: [Folium, Streamlit, GTFS, Census ACS, librosa]
 
 # Shown only on the research-targeted resume, ordered for a quantitative reader.
 quantitative_coursework: >-
