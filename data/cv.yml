@@ -868,6 +868,7 @@ projects:
 
   - id: mixmaster
     site_order: 9
+    cv_rank: 9
     title: Quantitative Mix & Mastering Analysis Toolkit
     tag: Audio Signal Processing
     tag_class: type-ml
